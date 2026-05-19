@@ -12,3 +12,7 @@ yarn-error.log*
 pnpm-debug.log*
 public/media/*.MOV
 public/media/*.mov
+public/media/*.mp4
+public/media/*.MP4
+public/media/*.JPG
+public/media/*.jpg
