@@ -1,6 +1,6 @@
 import { SERVICE_OPTIONS, type ServiceKey } from '@/lib/siteContent';
 
-export type PropertySize = 'small' | 'medium' | 'large' | 'not-sure';
+export type PropertySize = 'small' | 'medium' | 'large';
 
 export type QuoteEstimateInput = {
   servicesNeeded: ServiceKey[];
@@ -19,8 +19,7 @@ export type QuoteEstimate = {
 const PROPERTY_MULTIPLIERS: Record<PropertySize, number> = {
   small: 1,
   medium: 1.5,
-  large: 2,
-  'not-sure': 1.25
+  large: 2
 };
 
 const HOURLY_RATE = 40;

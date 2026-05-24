@@ -3,6 +3,7 @@ import { Manrope, Space_Grotesk } from 'next/font/google';
 import './globals.css';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
+import { PageWatermark } from '@/components/PageWatermark';
 
 const headingFont = Space_Grotesk({ subsets: ['latin'], variable: '--font-heading' });
 const bodyFont = Manrope({ subsets: ['latin'], variable: '--font-body' });
@@ -17,8 +18,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en" className="scroll-smooth">
       <body className={`${headingFont.variable} ${bodyFont.variable} bg-slate-50 text-slate-900 antialiased`}>
         <div className="relative flex min-h-screen flex-col overflow-hidden">
+          <PageWatermark />
           <Navbar />
-          <main className="relative z-10 flex-1 pt-24">{children}</main>
+          <main className="relative z-10 flex-1 pt-24 font-medium">{children}</main>
           <Footer />
         </div>
       </body>

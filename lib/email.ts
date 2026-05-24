@@ -2,6 +2,12 @@ import { Resend } from 'resend';
 import type { QuoteRequestInput } from '@/lib/quoteSchema';
 import { SERVICE_OPTIONS } from '@/lib/siteContent';
 
+export type QuoteEmailAttachment = {
+  filename: string;
+  content: Buffer;
+  contentType?: string;
+};
+
 function cleanText(value: string | undefined | null) {
   return (value ?? '').toString().replace(/\s+/g, ' ').trim();
 }
@@ -12,7 +18,7 @@ function formatServices(serviceKeys: string[]) {
     .join(', ');
 }
 
-function buildQuoteEmailText(submission: QuoteRequestInput) {
+function buildQuoteEmailText(submission: QuoteRequestInput, attachmentCount = 0) {
   const lines = [
     'New quote request from The LawnFather website',
     '',
@@ -27,6 +33,7 @@ function buildQuoteEmailText(submission: QuoteRequestInput) {
     `Property Size: ${submission.propertySize}`,
     `Preferred Contact Method: ${submission.preferredContactMethod}`,
     `Preferred Date/Time: ${submission.preferredDateTime ? cleanText(submission.preferredDateTime) : 'Not provided'}`,
+    attachmentCount > 0 ? `Uploaded Photos: ${attachmentCount} file(s) attached` : 'Uploaded Photos: None',
     '',
     'Job Description:',
     cleanText(submission.jobDescription),
@@ -37,7 +44,7 @@ function buildQuoteEmailText(submission: QuoteRequestInput) {
   return lines.join('\n');
 }
 
-function buildQuoteEmailHtml(submission: QuoteRequestInput) {
+function buildQuoteEmailHtml(submission: QuoteRequestInput, attachmentCount = 0) {
   const rows = [
     ['Name', submission.fullName],
     ['Email', submission.email],
@@ -49,7 +56,8 @@ function buildQuoteEmailHtml(submission: QuoteRequestInput) {
     ['Services Needed', formatServices(submission.servicesNeeded)],
     ['Property Size', submission.propertySize],
     ['Preferred Contact Method', submission.preferredContactMethod],
-    ['Preferred Date/Time', submission.preferredDateTime ?? 'Not provided']
+    ['Preferred Date/Time', submission.preferredDateTime ?? 'Not provided'],
+    ['Uploaded Photos', attachmentCount > 0 ? `${attachmentCount} file(s) attached` : 'None']
   ];
 
   return `
@@ -78,10 +86,10 @@ function buildQuoteEmailHtml(submission: QuoteRequestInput) {
   `;
 }
 
-export async function sendQuoteEmail(submission: QuoteRequestInput) {
+export async function sendQuoteEmail(submission: QuoteRequestInput, attachments: QuoteEmailAttachment[] = []) {
   const apiKey = process.env.RESEND_API_KEY ?? process.env.EMAIL_SERVICE_API_KEY;
   const fromEmail = process.env.FROM_EMAIL ?? 'The LawnFather <onboarding@resend.dev>';
-  const receiverEmail = process.env.QUOTE_RECEIVER_EMAIL ?? 'hajduk7nathan@gmail.com';
+  const receiverEmail = process.env.QUOTE_RECEIVER_EMAIL ?? 'lawnfatherco@gmail.com';
 
   if (!apiKey) {
     throw new Error('Missing RESEND_API_KEY or EMAIL_SERVICE_API_KEY.');
@@ -93,7 +101,8 @@ export async function sendQuoteEmail(submission: QuoteRequestInput) {
     from: fromEmail,
     to: receiverEmail,
     subject: 'New Quote Request from The LawnFather Website',
-    text: buildQuoteEmailText(submission),
-    html: buildQuoteEmailHtml(submission)
+    text: buildQuoteEmailText(submission, attachments.length),
+    html: buildQuoteEmailHtml(submission, attachments.length),
+    attachments: attachments.length > 0 ? attachments : undefined
   });
 }

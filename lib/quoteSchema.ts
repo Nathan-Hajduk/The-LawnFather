@@ -13,7 +13,7 @@ export const quoteRequestSchema = z.object({
   state: z.string().trim().min(2, 'Please enter a state code.'),
   zipCode: z.string().trim().regex(zipPattern, 'Please enter a valid ZIP code.'),
   servicesNeeded: z.array(z.enum(SERVICE_KEYS)).min(1, 'Select at least one service.'),
-  propertySize: z.enum(['small', 'medium', 'large', 'not-sure']),
+  propertySize: z.enum(['small', 'medium', 'large']),
   jobDescription: z.string().trim().min(10, 'Please describe the work you need.'),
   preferredContactMethod: z.enum(['phone', 'email', 'text']),
   preferredDateTime: z.string().trim().optional().or(z.literal('')),

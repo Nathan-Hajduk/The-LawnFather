@@ -84,9 +84,9 @@ This works well on business cards and printed flyers.
 - Replace the work showcase placeholders with before-and-after photos.
 - Replace the service video placeholder with actual job clips later.
 
-## Replacing Sample Testimonials
+## Testimonials
 
-The testimonial rotator intentionally uses clearly labeled sample feedback. Replace the placeholder reviews and names with real customer reviews as the business grows.
+This project ships with curated customer feedback included in `lib/siteContent.ts` and displayed by the testimonial rotator. Update or add real testimonials there as you collect them.
 
 ## Project Structure
 

@@ -18,7 +18,7 @@ type FormState = {
   state: string;
   zipCode: string;
   servicesNeeded: ServiceKey[];
-  propertySize: 'small' | 'medium' | 'large' | 'not-sure';
+  propertySize: 'small' | 'medium' | 'large';
   jobDescription: string;
   preferredContactMethod: 'phone' | 'email' | 'text';
   preferredDateTime: string;
@@ -27,11 +27,10 @@ type FormState = {
 
 type FormErrors = Partial<Record<keyof FormState, string>>;
 
-const PROPERTY_SIZE_OPTIONS: Array<{ value: FormState['propertySize']; label: string }> = [
-  { value: 'small', label: 'Small' },
-  { value: 'medium', label: 'Medium' },
-  { value: 'large', label: 'Large' },
-  { value: 'not-sure', label: 'Not Sure' }
+const PROPERTY_SIZE_OPTIONS: Array<{ value: FormState['propertySize']; label: string; detail: string }> = [
+  { value: 'small', label: 'Small', detail: 'Under 1 acre' },
+  { value: 'medium', label: 'Medium', detail: '1-2 acres' },
+  { value: 'large', label: 'Large', detail: '3+ acres' }
 ];
 
 const CONTACT_OPTIONS: Array<{ value: FormState['preferredContactMethod']; label: string }> = [
@@ -53,7 +52,7 @@ function createInitialState(initialServiceSlug?: ServiceKey): FormState {
     state: '',
     zipCode: '',
     servicesNeeded: initialServiceSlug ? [initialServiceSlug] : [],
-    propertySize: 'not-sure',
+    propertySize: 'small',
     jobDescription: '',
     preferredContactMethod: 'phone',
     preferredDateTime: '',
@@ -83,6 +82,7 @@ function validateForm(values: FormState) {
 
 export function QuoteForm({ initialServiceSlug }: QuoteFormProps) {
   const [formState, setFormState] = useState<FormState>(() => createInitialState(initialServiceSlug));
+  const [selectedPhotos, setSelectedPhotos] = useState<File[]>([]);
   const [formErrors, setFormErrors] = useState<FormErrors>({});
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [statusMessage, setStatusMessage] = useState('');
@@ -116,6 +116,10 @@ export function QuoteForm({ initialServiceSlug }: QuoteFormProps) {
     }));
   }
 
+  function handlePhotoUpload(files: FileList | null) {
+    setSelectedPhotos(files ? Array.from(files) : []);
+  }
+
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setSubmitStatus('idle');
@@ -138,37 +142,39 @@ export function QuoteForm({ initialServiceSlug }: QuoteFormProps) {
     setIsSubmitting(true);
 
     try {
+      const payload = new FormData();
+      payload.append('fullName', sanitizeText(formState.fullName));
+      payload.append('email', sanitizeText(formState.email));
+      payload.append('phoneNumber', sanitizeText(formState.phoneNumber));
+      payload.append('propertyAddress', sanitizeText(formState.propertyAddress));
+      payload.append('city', sanitizeText(formState.city));
+      payload.append('state', sanitizeText(formState.state));
+      payload.append('zipCode', sanitizeText(formState.zipCode));
+      formState.servicesNeeded.forEach((service) => payload.append('servicesNeeded', service));
+      payload.append('propertySize', formState.propertySize);
+      payload.append('jobDescription', sanitizeText(formState.jobDescription));
+      payload.append('preferredContactMethod', formState.preferredContactMethod);
+      payload.append('preferredDateTime', formState.preferredDateTime);
+      payload.append('honeypot', formState.honeypot);
+      selectedPhotos.forEach((photo) => payload.append('photos', photo));
+
       const response = await fetch('/api/quote', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          fullName: sanitizeText(formState.fullName),
-          email: sanitizeText(formState.email),
-          phoneNumber: sanitizeText(formState.phoneNumber),
-          propertyAddress: sanitizeText(formState.propertyAddress),
-          city: sanitizeText(formState.city),
-          state: sanitizeText(formState.state),
-          zipCode: sanitizeText(formState.zipCode),
-          servicesNeeded: formState.servicesNeeded,
-          propertySize: formState.propertySize,
-          jobDescription: sanitizeText(formState.jobDescription),
-          preferredContactMethod: formState.preferredContactMethod,
-          preferredDateTime: formState.preferredDateTime,
-          honeypot: formState.honeypot
-        })
+        body: payload
       });
 
-      const payload = (await response.json().catch(() => ({}))) as { message?: string };
+      const responseBody = (await response.json().catch(() => ({}))) as { message?: string };
 
       if (!response.ok) {
         setSubmitStatus('error');
-        setStatusMessage(payload.message ?? 'Something went wrong while sending your request.');
+        setStatusMessage(responseBody.message ?? 'Something went wrong while sending your request.');
         return;
       }
 
       setSubmitStatus('success');
-      setStatusMessage(payload.message ?? 'Your quote request was sent successfully.');
+      setStatusMessage(responseBody.message ?? 'Your quote request was sent successfully.');
       setFormState(createInitialState(initialServiceSlug));
+      setSelectedPhotos([]);
       setFormErrors({});
     } catch {
       setSubmitStatus('error');
@@ -245,11 +251,14 @@ export function QuoteForm({ initialServiceSlug }: QuoteFormProps) {
 
         <div>
           <p className="label-text">Property Size</p>
-          <div className="grid gap-3 sm:grid-cols-4">
+          <div className="grid gap-3 sm:grid-cols-3">
             {PROPERTY_SIZE_OPTIONS.map((option) => (
               <label key={option.value} className={`flex cursor-pointer items-center gap-3 rounded-2xl border px-4 py-3 text-sm ${formState.propertySize === option.value ? 'border-emerald-400 bg-emerald-50 text-slate-900' : 'border-slate-200 bg-white text-slate-700 hover:border-emerald-300 hover:bg-emerald-50'}`}>
                 <input type="radio" name="propertySize" value={option.value} checked={formState.propertySize === option.value} onChange={() => updateField('propertySize', option.value)} className="h-4 w-4 border-slate-300 text-emerald-600 focus:ring-emerald-300" />
-                {option.label}
+                <span>
+                  <span className="block font-semibold">{option.label}</span>
+                  <span className="block text-xs text-slate-500">{option.detail}</span>
+                </span>
               </label>
             ))}
           </div>
@@ -272,6 +281,21 @@ export function QuoteForm({ initialServiceSlug }: QuoteFormProps) {
             <textarea id="jobDescription" rows={6} className="input-shell resize-none" value={formState.jobDescription} onChange={(event) => updateField('jobDescription', event.target.value)} />
             {formErrors.jobDescription ? <p className="mt-2 text-sm font-medium text-red-600">{formErrors.jobDescription}</p> : null}
           </div>
+        </div>
+
+        <div>
+          <label className="label-text" htmlFor="photos">Upload Photos</label>
+          <input id="photos" type="file" accept="image/*" multiple onChange={(event) => handlePhotoUpload(event.target.files)} className="input-shell py-3" />
+          <p className="mt-2 text-xs leading-5 text-slate-500">Upload one or more photos of the area you need worked on.</p>
+          {selectedPhotos.length > 0 ? (
+            <ul className="mt-3 space-y-2 text-sm text-slate-700">
+              {selectedPhotos.map((photo) => (
+                <li key={`${photo.name}-${photo.size}`} className="rounded-2xl border border-slate-200 bg-white px-4 py-3">
+                  {photo.name}
+                </li>
+              ))}
+            </ul>
+          ) : null}
         </div>
 
         <div className="sr-only" aria-hidden="true">
@@ -307,16 +331,6 @@ export function QuoteForm({ initialServiceSlug }: QuoteFormProps) {
           <div className="mt-5 rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-sm font-medium leading-6 text-emerald-900">
             Estimate is not final. Final pricing may vary based on property condition, job complexity, materials, travel distance, and required labor.
           </div>
-        </div>
-
-        <div className="glass-panel p-6">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-emerald-800">How the estimate works</p>
-          <ul className="mt-4 space-y-3 text-sm leading-6 text-slate-600">
-            <li>Hourly services currently use a simple $40/hour baseline.</li>
-            <li>Property size affects the estimated labor range.</li>
-            <li>Inspection-based services still require a custom quote.</li>
-            <li>Final quotes are confirmed after reviewing the job details.</li>
-          </ul>
         </div>
       </aside>
     </div>

@@ -3,6 +3,7 @@ import Link from 'next/link';
 const QUICK_LINKS = [
   { href: '/', label: 'Home' },
   { href: '/services', label: 'Services' },
+  { href: '/gallery', label: 'Gallery' },
   { href: '/intro', label: 'Intro' },
   { href: '/quote', label: 'Get a Quote' },
   { href: '/about', label: 'About' }
@@ -26,7 +27,7 @@ export function Footer() {
               Phone: <a href="tel:9803396491" className="text-slate-900 hover:text-emerald-700">980-339-6491</a>
             </p>
             <p>
-              Email: <a href="mailto:hajduk7nathan@gmail.com" className="text-slate-900 hover:text-emerald-700">hajduk7nathan@gmail.com</a>
+              Email: <a href="mailto:lawnfatherco@gmail.com" className="text-slate-900 hover:text-emerald-700">lawnfatherco@gmail.com</a>
             </p>
           </div>
         </div>

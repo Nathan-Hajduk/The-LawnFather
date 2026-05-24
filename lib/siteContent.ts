@@ -18,6 +18,11 @@ export type ServiceCardContent = {
   pricingNote: string;
   estimateType: 'custom' | 'hourly';
   hourlyHours?: [number, number];
+  featuredMedia?: {
+    src: string;
+    kind: 'image' | 'video';
+    alt: string;
+  };
 };
 
 export const SERVICE_OPTIONS: ServiceCardContent[] = [
@@ -26,14 +31,24 @@ export const SERVICE_OPTIONS: ServiceCardContent[] = [
     name: 'Mowing',
     description: 'Consistent, clean cuts that keep your lawn sharp and healthy through the season.',
     pricingNote: 'Custom quote based on property size and job scope.',
-    estimateType: 'custom'
+    estimateType: 'custom',
+    featuredMedia: {
+      src: '/media/Mowing.MP4',
+      kind: 'video',
+      alt: 'Mowing service video'
+    }
   },
   {
     key: 'weedwacking',
     name: 'Weedwacking',
     description: 'Edge cleanup for fences, beds, walkways, and hard-to-reach areas around your property.',
     pricingNote: 'Custom quote based on property size and job scope.',
-    estimateType: 'custom'
+    estimateType: 'custom',
+    featuredMedia: {
+      src: '/media/Weedwacking.BushTrimming1.jpeg',
+      kind: 'image',
+      alt: 'Weedwacking and bush trimming photo'
+    }
   },
   {
     key: 'weeding',
@@ -41,21 +56,36 @@ export const SERVICE_OPTIONS: ServiceCardContent[] = [
     description: 'Hands-on removal of unwanted growth to keep beds and outdoor spaces tidy.',
     pricingNote: 'Starting at $40/hour.',
     estimateType: 'hourly',
-    hourlyHours: [2, 4]
+    hourlyHours: [2, 4],
+    featuredMedia: {
+      src: '/media/Weeding1.jpeg',
+      kind: 'image',
+      alt: 'Weeding service photo'
+    }
   },
   {
     key: 'bush-trimming',
     name: 'Bush Trimming',
     description: 'Shape and maintain shrubs so your landscape looks neat and balanced.',
     pricingNote: 'Custom quote based on property size and job scope.',
-    estimateType: 'custom'
+    estimateType: 'custom',
+    featuredMedia: {
+      src: '/media/BushTrimming.jpeg',
+      kind: 'image',
+      alt: 'Bush trimming service photo'
+    }
   },
   {
     key: 'mulching',
     name: 'Mulching',
     description: 'Fresh mulch installation to improve curb appeal, moisture retention, and weed control.',
     pricingNote: 'Custom quote based on property size and job scope.',
-    estimateType: 'custom'
+    estimateType: 'custom',
+    featuredMedia: {
+      src: '/media/MainMulchingVideo.mp4',
+      kind: 'video',
+      alt: 'Mulching service video'
+    }
   },
   {
     key: 'gardening',
@@ -63,14 +93,24 @@ export const SERVICE_OPTIONS: ServiceCardContent[] = [
     description: 'Planting, bed cleanup, and garden support for a more polished and welcoming yard.',
     pricingNote: 'Starting at $40/hour.',
     estimateType: 'hourly',
-    hourlyHours: [2, 5]
+    hourlyHours: [2, 5],
+    featuredMedia: {
+      src: '/media/GardneringAeration1.jpeg',
+      kind: 'image',
+      alt: 'Gardening and aeration photo'
+    }
   },
   {
     key: 'powerwashing',
     name: 'Powerwashing',
     description: 'Exterior cleaning for driveways, patios, siding, and other surfaces that need a refresh.',
     pricingNote: 'Custom quote based on property size and job scope.',
-    estimateType: 'custom'
+    estimateType: 'custom',
+    featuredMedia: {
+      src: '/media/PoolCleanup.BushTrim.FurniturePowerwash.mp4',
+      kind: 'video',
+      alt: 'Powerwashing and cleanup video'
+    }
   },
   {
     key: 'small-handyman-work',
@@ -78,7 +118,12 @@ export const SERVICE_OPTIONS: ServiceCardContent[] = [
     description: 'Light property fixes, touch-ups, and help with minor outdoor or home maintenance tasks.',
     pricingNote: 'Starting at $40/hour.',
     estimateType: 'hourly',
-    hourlyHours: [1, 4]
+    hourlyHours: [1, 4],
+    featuredMedia: {
+      src: '/media/BrushRemoval.Weeding.Trimming.mp4',
+      kind: 'video',
+      alt: 'Brush removal, weeding, and trimming video'
+    }
   }
 ];
 
@@ -123,23 +168,103 @@ export const VALUE_PROPS = [
 
 export const TESTIMONIALS = [
   {
-    name: 'Jordan M.',
-    quote: 'The communication was excellent, and the yard looked completely refreshed.'
+    name: 'Brookville Client',
+    quote: 'Nathan did an amazing job on our yard in Brookville. He was professional, respectful, and treated the property with real care. The lawn looked clean, sharp, and well maintained.'
   },
   {
-    name: 'Alex R.',
-    quote: 'Very punctual, fair pricing, and strong attention to detail.'
+    name: 'Old Westbury Client',
+    quote: 'Nathan helped us with mowing, trimming, and cleanup in Old Westbury, and the results were excellent. He showed up ready to work and left everything looking immaculate.'
   },
   {
-    name: 'Taylor S.',
-    quote: 'The work was clean, professional, and better than expected.'
+    name: 'Manhasset Client',
+    quote: 'We hired Nathan for a yard cleanup in Manhasset, and he exceeded expectations. The edges were clean, the weeds were gone, and the whole property looked refreshed.'
   },
   {
-    name: 'Morgan K.',
-    quote: 'Great customer service and dependable scheduling.'
+    name: 'Sands Point Client',
+    quote: 'Nathan was easy to communicate with and did a great job on our landscaping in Sands Point. He paid attention to the small details that really make a yard look finished.'
   },
   {
-    name: 'Casey D.',
-    quote: 'Helped make the property look sharper and more welcoming.'
+    name: 'Glen Head Client',
+    quote: 'Nathan came out to our home in Glen Head and completely cleaned up the front yard. The work was neat, efficient, and professional from start to finish.'
+  },
+  {
+    name: 'Roslyn Client',
+    quote: 'I needed help with overgrown bushes and weeds in Roslyn, and Nathan handled everything perfectly. He worked hard and made the property look much more polished.'
+  },
+  {
+    name: 'Jericho Client',
+    quote: 'Nathan did a fantastic mulch job for us in Jericho. He was thorough, respectful, and made the whole front of the house look upgraded.'
+  },
+  {
+    name: 'Syosset Client',
+    quote: 'The LawnFather, led by Nathan, gave our yard in Syosset a complete refresh. The mowing, trimming, and cleanup were all done with care.'
+  },
+  {
+    name: 'Oyster Bay Client',
+    quote: 'Nathan was professional and dependable. He came to our property in Oyster Bay and made the lawn look clean, even, and well kept.'
+  },
+  {
+    name: 'Locust Valley Client',
+    quote: 'We had Nathan help with weeding and general lawn care in Locust Valley. He was punctual, hardworking, and very detail oriented.'
+  },
+  {
+    name: 'Hicksville Client',
+    quote: 'Nathan did an excellent job at our home in Hicksville. The yard went from messy to clean and presentable in one visit. Highly recommend his work.'
+  },
+  {
+    name: 'Muttontown Client',
+    quote: 'Nathan took care of our property in Muttontown and did an outstanding job. He clearly takes pride in his work, and it shows in the final result.'
+  },
+  {
+    name: 'Matthews Client',
+    quote: 'We booked Nathan for lawn care in Matthews, NC, and he did not disappoint. Great communication, clean work, and a very professional attitude.'
+  },
+  {
+    name: 'Charlotte Client',
+    quote: 'Nathan helped us clean up our yard in Charlotte, and the difference was huge. He worked efficiently and made everything look fresh again.'
+  },
+  {
+    name: 'Ballantyne Client',
+    quote: 'I hired Nathan for mowing and weed trimming in Ballantyne, and he did excellent work. The lawn looked sharp, and he left no mess behind.'
+  },
+  {
+    name: 'SouthPark Client',
+    quote: 'Nathan did a great job with our yard in SouthPark. He was respectful, focused, and made sure the property looked right before leaving.'
+  },
+  {
+    name: 'Indian Trail Client',
+    quote: 'We needed a full cleanup in Indian Trail, and Nathan came through. The LawnFather service was professional, reliable, and worth every penny.'
+  },
+  {
+    name: 'Mint Hill Client',
+    quote: 'Nathan handled our lawn care in Mint Hill, and the results were better than expected. Clean lines, careful trimming, and a very polished look.'
+  },
+  {
+    name: 'Huntersville Client',
+    quote: 'Nathan did a wonderful job on our property in Huntersville. He was communicative, hardworking, and made the yard look much healthier.'
+  },
+  {
+    name: 'Pineville Client',
+    quote: 'We had Nathan come out to our home in Pineville for mowing and cleanup. He was professional, quick, and very meticulous with the details.'
+  },
+  {
+    name: 'Concord Client',
+    quote: 'Nathan helped us with weeding and mulch in Concord, NC, and the yard looks beautiful. He brought everything back to life.'
+  },
+  {
+    name: 'Waxhaw Client',
+    quote: 'Nathan was great to work with in Waxhaw. He listened to what we needed, gave honest feedback, and delivered clean, high quality work.'
+  },
+  {
+    name: 'Weddington Client',
+    quote: 'The LawnFather did a great job at our home in Weddington, and Nathan was professional the entire time. The property looked clean and cared for.'
+  },
+  {
+    name: 'Mooresville Client',
+    quote: 'Nathan came to our house in Mooresville and made the yard look brand new. He was reliable, respectful, and clearly has a strong work ethic.'
+  },
+  {
+    name: 'Davidson Client',
+    quote: 'Nathan provided excellent lawn care service in Davidson. The whole process was simple, the communication was clear, and the final result looked pristine.'
   }
 ];

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { CTASection } from '@/components/CTASection';
+import { ReviewRotator } from '@/components/ReviewRotator';
 import { RevealSection } from '@/components/RevealSection';
 import { ServiceCard } from '@/components/ServiceCard';
 import { SERVICE_OPTIONS } from '@/lib/siteContent';
@@ -16,8 +17,8 @@ export default function ServicesPage() {
     <div className="px-4 pb-20 sm:px-6 lg:px-8">
       <RevealSection className="mx-auto max-w-7xl space-y-6">
         <p className="section-kicker">Services</p>
-        <h1 className="max-w-3xl text-4xl font-semibold text-slate-900 sm:text-5xl">Services</h1>
-        <p className="max-w-3xl text-base leading-8 text-slate-600">Choose what you need, then request a quote. Hourly services start at $40/hour. Larger or property-specific jobs get a custom quote.</p>
+        <h1 className="max-w-3xl text-4xl font-semibold text-slate-900 sm:text-5xl">Service Categories</h1>
+        <p className="max-w-3xl text-base leading-8 text-slate-600">Choose a category, then request a quote. Each service card is clickable and will take you straight to the quote page.</p>
         <div className="flex flex-col gap-3 sm:flex-row">
           <Link href="/quote" className="neon-button">
             Get a Free Quote <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
@@ -34,6 +35,10 @@ export default function ServicesPage() {
             <ServiceCard key={service.key} service={service} />
           ))}
         </div>
+      </section>
+
+      <section className="mx-auto mt-20 max-w-7xl">
+        <ReviewRotator />
       </section>
 
       <section className="mx-auto mt-20 max-w-7xl">

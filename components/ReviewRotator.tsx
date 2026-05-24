@@ -21,8 +21,8 @@ export function ReviewRotator() {
     <section className="glass-panel-strong overflow-hidden p-6 sm:p-8">
       <div className="mb-6 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <p className="section-kicker">Sample Customer Feedback</p>
-          <h2 className="mt-3 text-2xl font-semibold text-slate-900 sm:text-3xl">Replace these with real customer reviews as your business grows.</h2>
+          <p className="section-kicker">Customer Feedback</p>
+          <h2 className="mt-3 text-2xl font-semibold text-slate-900 sm:text-3xl">What clients are saying about The LawnFather.</h2>
         </div>
         <div className="flex items-center gap-2 text-emerald-700">
           {Array.from({ length: 5 }).map((_, starIndex) => (
@@ -33,10 +33,10 @@ export function ReviewRotator() {
 
       <div className="relative min-h-[180px] rounded-[1.5rem] border border-white/5 bg-white/[0.03] p-6">
         <article key={review.name} className="animate-fade-up">
-          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-emerald-800">Example Testimonials</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-emerald-800">Customer Feedback</p>
           <p className="mt-4 max-w-3xl text-lg leading-8 text-slate-800">“{review.quote}”</p>
           <p className="mt-5 text-sm font-semibold text-slate-900">{review.name}</p>
-          <p className="mt-1 text-xs uppercase tracking-[0.18em] text-slate-500">Sample testimonial</p>
+          <p className="mt-1 text-xs uppercase tracking-[0.18em] text-slate-500">5 Stars</p>
         </article>
 
         <div className="mt-6 flex items-center justify-between gap-4">

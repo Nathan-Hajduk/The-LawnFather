@@ -31,8 +31,39 @@ export async function POST(request: Request) {
       return NextResponse.json({ message: 'Too many quote requests. Please try again later.' }, { status: 429 });
     }
 
-    const payload = await request.json();
-    const result = quoteRequestSchema.safeParse(payload);
+    const contentType = request.headers.get('content-type') ?? '';
+    const payload = contentType.includes('multipart/form-data') ? await request.formData() : await request.json();
+    const attachments: Array<{ filename: string; content: Buffer; contentType?: string }> = [];
+
+    const result = payload instanceof FormData
+      ? quoteRequestSchema.safeParse({
+          fullName: String(payload.get('fullName') ?? ''),
+          email: String(payload.get('email') ?? ''),
+          phoneNumber: String(payload.get('phoneNumber') ?? ''),
+          propertyAddress: String(payload.get('propertyAddress') ?? ''),
+          city: String(payload.get('city') ?? ''),
+          state: String(payload.get('state') ?? ''),
+          zipCode: String(payload.get('zipCode') ?? ''),
+          servicesNeeded: payload.getAll('servicesNeeded').map((value) => String(value)),
+          propertySize: String(payload.get('propertySize') ?? ''),
+          jobDescription: String(payload.get('jobDescription') ?? ''),
+          preferredContactMethod: String(payload.get('preferredContactMethod') ?? ''),
+          preferredDateTime: String(payload.get('preferredDateTime') ?? ''),
+          honeypot: String(payload.get('honeypot') ?? '')
+        })
+      : quoteRequestSchema.safeParse(payload);
+
+    if (payload instanceof FormData) {
+      for (const file of payload.getAll('photos')) {
+        if (!(file instanceof File) || file.size === 0) continue;
+
+        attachments.push({
+          filename: file.name || 'photo.jpg',
+          content: Buffer.from(await file.arrayBuffer()),
+          contentType: file.type || undefined
+        });
+      }
+    }
 
     if (!result.success) {
       return NextResponse.json({ message: 'Please check the form fields and try again.', errors: result.error.flatten() }, { status: 400 });
@@ -43,7 +74,7 @@ export async function POST(request: Request) {
     }
 
     // TODO: If you swap email providers later, keep this validation and only replace the send function.
-    await sendQuoteEmail(result.data);
+    await sendQuoteEmail(result.data, attachments);
 
     return NextResponse.json({ message: 'Your quote request was sent successfully.' }, { status: 200 });
   } catch (error) {
