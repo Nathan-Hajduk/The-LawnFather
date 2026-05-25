@@ -9,6 +9,11 @@ type MediaGalleryProps = {
   className?: string;
 };
 
+type MediaPair = {
+  earlier: MediaItem;
+  later?: MediaItem;
+};
+
 function MediaCard({ item }: { item: MediaItem }) {
   return (
     <article className="glass-panel overflow-hidden p-2">
@@ -28,8 +33,22 @@ function MediaCard({ item }: { item: MediaItem }) {
   );
 }
 
+function pairItems(items: MediaItem[]): MediaPair[] {
+  const pairs: MediaPair[] = [];
+
+  for (let index = 0; index < items.length; index += 2) {
+    pairs.push({
+      earlier: items[index],
+      later: items[index + 1]
+    });
+  }
+
+  return pairs;
+}
+
 export function MediaGallery({ title, items, className = '' }: MediaGalleryProps) {
   const sortedItems = [...items].sort((left, right) => new Date(left.capturedAt).getTime() - new Date(right.capturedAt).getTime());
+  const pairedItems = pairItems(sortedItems);
 
   return (
     <section className={className}>
@@ -37,9 +56,28 @@ export function MediaGallery({ title, items, className = '' }: MediaGalleryProps
         <p className="section-kicker">{title}</p>
       </div>
 
-      <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
-        {sortedItems.map((item) => (
-          <MediaCard key={item.id} item={item} />
+      <div className="space-y-3">
+        {pairedItems.map((pair) => (
+          <div key={pair.earlier.id} className="grid gap-3 md:grid-cols-2">
+            <div className="glass-panel overflow-hidden p-2">
+              <div className="mb-2 flex items-center justify-between gap-3 px-1 text-xs font-semibold uppercase tracking-[0.2em] text-emerald-800">
+                <span>Before</span>
+                <span>{pair.earlier.kind === 'video' ? 'Video' : 'Photo'}</span>
+              </div>
+              <MediaCard item={pair.earlier} />
+            </div>
+            {pair.later ? (
+              <div className="glass-panel overflow-hidden p-2">
+                <div className="mb-2 flex items-center justify-between gap-3 px-1 text-xs font-semibold uppercase tracking-[0.2em] text-emerald-800">
+                  <span>After</span>
+                  <span>{pair.later.kind === 'video' ? 'Video' : 'Photo'}</span>
+                </div>
+                <MediaCard item={pair.later} />
+              </div>
+            ) : (
+              <div className="hidden md:block" />
+            )}
+          </div>
         ))}
       </div>
     </section>
