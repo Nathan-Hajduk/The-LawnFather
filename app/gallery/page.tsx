@@ -5,7 +5,7 @@ import { MEDIA_SECTIONS, getMediaItems } from '@/lib/media';
 
 export const metadata: Metadata = {
   title: 'Gallery | The LawnFather',
-  description: 'A location-based gallery for matching images to service categories.'
+  description: 'Recent lawn care, cleanup, mulching, trimming, planting, and property improvement work from The LawnFather.'
 };
 
 export default function GalleryPage() {
@@ -18,8 +18,8 @@ export default function GalleryPage() {
     <div className="px-4 pb-20 sm:px-6 lg:px-8">
       <RevealSection className="mx-auto max-w-7xl space-y-6">
         <p className="section-kicker">Gallery</p>
-        <h1 className="max-w-3xl text-4xl font-semibold text-slate-900 sm:text-5xl">Gallery Layout</h1>
-        <p className="max-w-3xl text-base font-semibold leading-8 text-slate-700">Use this page to match images to each service location. Every card follows the same format.</p>
+        <h1 className="max-w-3xl text-4xl font-semibold text-slate-900 sm:text-5xl">Our Work</h1>
+        <p className="max-w-3xl text-base font-semibold leading-8 text-slate-700">Real lawn care, cleanup, mulching, trimming, planting, and property improvement work completed by The LawnFather.</p>
       </RevealSection>
 
       <GalleryBrowser sections={sections} />

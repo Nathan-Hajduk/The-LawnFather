@@ -322,7 +322,7 @@ export function QuoteForm({ initialServiceSlug }: QuoteFormProps) {
         <div className="glass-panel-strong p-6">
           <p className="section-kicker">Estimate Preview</p>
           <h2 className="mt-4 text-2xl font-semibold text-slate-900">{estimate.rangeLabel}</h2>
-          <p className="mt-3 text-sm leading-6 text-slate-600">{estimate.requiresPropertyReview ? 'Some services need a property review.' : 'This is a simple estimate range.'}</p>
+          <p className="mt-3 text-sm leading-6 text-slate-600">{estimate.requiresPropertyReview ? 'Some jobs need a quick property review before accurate pricing. Photos help me give you a faster and more precise quote.' : 'This is a simple estimate range.'}</p>
           <div className="mt-5 space-y-3 text-sm text-slate-600">
             {estimate.breakdown.map((item) => (
               <p key={item} className="rounded-2xl border border-slate-200 bg-white p-3 leading-6 text-slate-700">{item}</p>

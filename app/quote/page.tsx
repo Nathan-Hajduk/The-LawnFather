@@ -28,7 +28,7 @@ export default async function QuotePage({ searchParams }: QuotePageProps) {
       <RevealSection className="mx-auto max-w-7xl space-y-6">
         <p className="section-kicker">Get a Quote</p>
         <h1 className="max-w-3xl text-4xl font-semibold text-slate-900 sm:text-5xl">Request a Quote</h1>
-        <p className="max-w-3xl text-base leading-8 text-slate-600">Fill out the form and I will follow up with a quote.</p>
+        <p className="max-w-3xl text-base leading-8 text-slate-600">Tell me what your property needs, upload a few photos, and I’ll follow up with a clear quote or next steps.</p>
       </RevealSection>
 
       <section className="mx-auto mt-14 max-w-7xl">

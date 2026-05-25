@@ -95,9 +95,13 @@ export async function sendQuoteEmail(submission: QuoteRequestInput, attachments:
     throw new Error('Missing RESEND_API_KEY or EMAIL_SERVICE_API_KEY.');
   }
 
+  if (/@gmail\.com\b/i.test(fromEmail)) {
+    throw new Error('FROM_EMAIL cannot be a Gmail address when sending through Resend. Use a verified Resend sender or a verified custom-domain address.');
+  }
+
   const resend = new Resend(apiKey);
 
-  return resend.emails.send({
+  const response = await resend.emails.send({
     from: fromEmail,
     to: receiverEmail,
     subject: 'New Quote Request from The LawnFather Website',
@@ -105,4 +109,10 @@ export async function sendQuoteEmail(submission: QuoteRequestInput, attachments:
     html: buildQuoteEmailHtml(submission, attachments.length),
     attachments: attachments.length > 0 ? attachments : undefined
   });
+
+  if (response.error) {
+    throw new Error(response.error.message ?? 'Resend rejected the quote email request.');
+  }
+
+  return response;
 }
