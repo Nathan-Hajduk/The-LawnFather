@@ -16,7 +16,7 @@ export function ServiceCard({ service }: ServiceCardProps) {
           <h3 className="mt-2 text-2xl font-semibold text-slate-900">{service.name}</h3>
         </div>
         <span className="rounded-full border border-emerald-300/20 bg-emerald-100 px-3 py-1 text-xs font-medium text-emerald-800">
-          {service.estimateType === 'hourly' ? '$40/hr+' : 'Quote'}
+          {service.estimateType === 'hourly' ? '$50/hr+' : 'Quote'}
         </span>
       </div>
 

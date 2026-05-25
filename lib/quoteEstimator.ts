@@ -22,7 +22,7 @@ const PROPERTY_MULTIPLIERS: Record<PropertySize, number> = {
   large: 2
 };
 
-const HOURLY_RATE = 40;
+const HOURLY_RATE = 50;
 
 function formatCurrency(value: number) {
   return new Intl.NumberFormat('en-US', {
@@ -53,7 +53,7 @@ export function estimateQuote(input: QuoteEstimateInput): QuoteEstimate {
 
       lowTotal += serviceLow;
       highTotal += serviceHigh;
-      breakdown.push(`${service.name}: ${formatCurrency(serviceLow)}-${formatCurrency(serviceHigh)} based on ${minHours}-${maxHours} hours at $40/hour.`);
+      breakdown.push(`${service.name}: ${formatCurrency(serviceLow)}-${formatCurrency(serviceHigh)} based on ${minHours}-${maxHours} hours at $${HOURLY_RATE}/hour.`);
       continue;
     }
 

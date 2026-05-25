@@ -54,7 +54,7 @@ export const SERVICE_OPTIONS: ServiceCardContent[] = [
     key: 'weeding',
     name: 'Weeding',
     description: 'Hands-on removal of unwanted growth to keep beds and outdoor spaces tidy.',
-    pricingNote: 'Starting at $40/hour.',
+    pricingNote: 'Starting at $50/hour.',
     estimateType: 'hourly',
     hourlyHours: [2, 4],
     featuredMedia: {
@@ -91,7 +91,7 @@ export const SERVICE_OPTIONS: ServiceCardContent[] = [
     key: 'gardening',
     name: 'Gardening',
     description: 'Planting, bed cleanup, and garden support for a more polished and welcoming yard.',
-    pricingNote: 'Starting at $40/hour.',
+    pricingNote: 'Starting at $50/hour.',
     estimateType: 'hourly',
     hourlyHours: [2, 5],
     featuredMedia: {
@@ -116,7 +116,7 @@ export const SERVICE_OPTIONS: ServiceCardContent[] = [
     key: 'small-handyman-work',
     name: 'Small Handyman Work',
     description: 'Light property fixes, touch-ups, and help with minor outdoor or home maintenance tasks.',
-    pricingNote: 'Starting at $40/hour.',
+    pricingNote: 'Starting at $50/hour.',
     estimateType: 'hourly',
     hourlyHours: [1, 4],
     featuredMedia: {
