@@ -65,7 +65,8 @@ export default function AboutPage() {
         </div>
         <div className="glass-panel-strong p-6 sm:p-8">
           <p className="section-kicker">Gallery</p>
-          <p className="mt-4 text-base font-bold leading-8 text-slate-900">Open the gallery page when you are ready to map images to each service location.</p>
+          <p className="mt-4 text-base font-bold leading-8 text-slate-900">View Recent Work</p>
+          <p className="mt-2 text-base leading-8 text-slate-700">See examples of the care, detail, and effort that go into each property.</p>
           <div className="mt-6">
             <Link href="/gallery" className="neon-button">
               Open Gallery <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
@@ -76,12 +77,12 @@ export default function AboutPage() {
 
       <section className="mx-auto mt-20 max-w-7xl">
         <CTASection
-          title="Scan, Watch, and Request a Quote"
-          description="QR codes can point directly to the home page."
+          title="Ready for a cleaner property?"
+          description="Tell me what your property needs and I’ll follow up with next steps."
           primaryHref="/quote"
           primaryLabel="Get a Free Quote"
-          secondaryHref="/services"
-          secondaryLabel="View Services"
+          secondaryHref="/gallery"
+          secondaryLabel="View Recent Work"
         />
       </section>
 
