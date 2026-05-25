@@ -71,10 +71,7 @@ See `.env.example` for the starter values.
 
 ## Custom Domain and QR Codes
 
-After deployment, point your custom domain to the Vercel project. Then generate a QR code for either:
-
-- the home page URL
-- the intro video anchor, for example `https://your-domain.com/#intro-video`
+After deployment, point your custom domain to the Vercel project. Then generate a QR code for the home page URL (for example `https://your-domain.com`).
 
 This works well on business cards and printed flyers.
 

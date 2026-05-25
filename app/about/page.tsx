@@ -77,7 +77,7 @@ export default function AboutPage() {
       <section className="mx-auto mt-20 max-w-7xl">
         <CTASection
           title="Scan, Watch, and Request a Quote"
-          description="QR codes can point to the home page or the intro video anchor."
+          description="QR codes can point directly to the home page."
           primaryHref="/quote"
           primaryLabel="Get a Free Quote"
           secondaryHref="/services"

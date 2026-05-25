@@ -4,7 +4,6 @@ const QUICK_LINKS = [
   { href: '/', label: 'Home' },
   { href: '/services', label: 'Services' },
   { href: '/gallery', label: 'Gallery' },
-  { href: '/intro', label: 'Intro' },
   { href: '/quote', label: 'Get a Quote' },
   { href: '/about', label: 'About' }
 ];
