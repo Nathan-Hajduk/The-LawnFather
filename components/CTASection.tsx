@@ -10,6 +10,8 @@ type CTASectionProps = {
 };
 
 export function CTASection({ title, description, primaryHref, primaryLabel, secondaryHref, secondaryLabel }: CTASectionProps) {
+  // Safety: prevent rendering the legacy redundant CTA "See The Work".
+  if (title === 'See The Work') return null;
   return (
     <section className="glass-panel-strong relative overflow-hidden p-8 sm:p-10">
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_right,rgba(34,197,94,0.12),transparent_28%),radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.5),transparent_24%)]" />
