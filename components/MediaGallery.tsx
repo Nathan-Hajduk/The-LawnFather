@@ -60,18 +60,10 @@ export function MediaGallery({ title, items, className = '' }: MediaGalleryProps
         {pairedItems.map((pair) => (
           <div key={pair.earlier.id} className="grid gap-3 md:grid-cols-2">
             <div className="glass-panel overflow-hidden p-2">
-              <div className="mb-2 flex items-center justify-between gap-3 px-1 text-xs font-semibold uppercase tracking-[0.2em] text-emerald-800">
-                <span>Before</span>
-                <span>{pair.earlier.kind === 'video' ? 'Video' : 'Photo'}</span>
-              </div>
               <MediaCard item={pair.earlier} />
             </div>
             {pair.later ? (
               <div className="glass-panel overflow-hidden p-2">
-                <div className="mb-2 flex items-center justify-between gap-3 px-1 text-xs font-semibold uppercase tracking-[0.2em] text-emerald-800">
-                  <span>After</span>
-                  <span>{pair.later.kind === 'video' ? 'Video' : 'Photo'}</span>
-                </div>
                 <MediaCard item={pair.later} />
               </div>
             ) : (
