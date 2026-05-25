@@ -10,7 +10,3 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
-public/media/*.MOV
-public/media/*.mov
-public/media/*.JPG
-public/media/*.jpg
