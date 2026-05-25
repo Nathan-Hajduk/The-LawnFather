@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, CheckCircle2, PhoneCall } from 'lucide-react';
@@ -15,6 +15,7 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   const featuredServices = SERVICE_OPTIONS;
+  const textForQuoteHref = 'sms:9803396491';
 
   return (
     <div className="relative">
@@ -29,15 +30,15 @@ export default function HomePage() {
                   width={1400}
                   height={1400}
                   priority
-                  className="h-auto w-full max-w-[46rem] sm:max-w-[54rem] lg:max-w-[64rem]"
+                  className="h-auto w-full max-w-[39rem] sm:max-w-[46rem] lg:max-w-[54rem]"
                 />
               </div>
               <p className="section-kicker">Local lawn care</p>
               <h1 className="mx-auto max-w-4xl text-4xl font-semibold leading-tight text-slate-900 sm:text-5xl lg:text-6xl">
-                Simple, reliable outdoor work.
+                Making your yard an offer it cannot refuse!
               </h1>
               <p className="mx-auto max-w-3xl text-base leading-8 text-slate-700 sm:text-lg">
-                Mowing, trimming, weeding, mulching, gardening, powerwashing, and small property help with clear communication from quote to cleanup.
+                Mowing, trimming, weeding, mulching, gardening, powerwashing, and small property projects handled with clear communication, fair pricing, and clean results.
               </p>
             </div>
 
@@ -45,6 +46,9 @@ export default function HomePage() {
               <Link href="/quote" className="neon-button">
                 Get a Free Quote <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
               </Link>
+              <a href={textForQuoteHref} className="neon-button">
+                Text Photos for a Quote <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
+              </a>
               <Link href="/services" className="neon-button-secondary">
                 View Services
               </Link>
@@ -84,15 +88,15 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section id="intro-video" className="px-4 pb-20 sm:px-6 lg:px-8">
+      <section className="px-4 pb-20 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <CTASection
-            title="Scan, meet The LawnFather, and request a quote."
-            description="Use the intro page for your business-card QR code, then send visitors straight into the quote form."
-            primaryHref="/intro"
-            primaryLabel="Open Intro Page"
-            secondaryHref="/quote"
-            secondaryLabel="Get a Free Quote"
+            title="Recent Property Work"
+            description="Browse real examples of mowing, trimming, mulching, cleanup, planting, powerwashing, and outdoor property work completed by The LawnFather."
+            primaryHref="/quote"
+            primaryLabel="Get a Free Quote"
+            secondaryHref="/gallery"
+            secondaryLabel="Open Gallery"
           />
         </div>
       </section>
@@ -100,8 +104,8 @@ export default function HomePage() {
       <section className="px-4 pb-20 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <CTASection
-            title="Browse the gallery layout"
-            description="Open the gallery page to review locations and tell me which images belong in each service category."
+            title="See The Work"
+            description="Browse recent projects and get a feel for the kind of clean, reliable property work we provide."
             primaryHref="/gallery"
             primaryLabel="Open Gallery"
             secondaryHref="/quote"
@@ -120,7 +124,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl">
           <CTASection
             title="Ready for a cleaner property?"
-            description="Tell me what you need and I will follow up with next steps."
+            description="Tell me what your property needs and I’ll follow up with next steps."
             primaryHref="/quote"
             primaryLabel="Get a Free Quote"
             secondaryHref="tel:9803396491"
