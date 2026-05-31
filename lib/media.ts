@@ -52,7 +52,11 @@ export const MEDIA_ITEMS: MediaItem[] = [
   { id: 'AboutUs4.JPG', kind: 'image', src: '/media/AboutUs4.JPG', title: 'About Us 4', serviceGroup: 'About The LawnFather', capturedAt: '2026-05-20T11:10:00' },
   { id: 'AboutUs5.JPG', kind: 'image', src: '/media/AboutUs5.JPG', title: 'About Us 5', serviceGroup: 'About The LawnFather', capturedAt: '2026-05-20T11:15:00' },
   { id: 'Mowing.MP4', kind: 'video', src: '/media/Mowing.MP4', title: 'Mowing', serviceGroup: 'Mowing', capturedAt: '2026-05-20T12:00:00' },
+  { id: 'Mow1.jpeg', kind: 'image', src: '/media/Mow1.jpeg', title: 'Mowing 1', serviceGroup: 'Mowing', capturedAt: '2026-05-31T10:00:00' },
   { id: 'BrushRemoval.Weeding.Trimming.mp4', kind: 'video', src: '/media/BrushRemoval.Weeding.Trimming.mp4', title: 'Brush Removal, Weeding, and Trimming', serviceGroup: 'Brush Removal, Weeding & Trimming', capturedAt: '2026-05-20T12:30:00' },
+  { id: 'BushTrim.jpeg', kind: 'image', src: '/media/BushTrim.jpeg', title: 'Bush Trim', serviceGroup: 'Bush Trimming', capturedAt: '2026-05-20T12:40:00' },
+  { id: 'BushTrim1.jpeg', kind: 'image', src: '/media/BushTrim1.jpeg', title: 'Bush Trim 1', serviceGroup: 'Bush Trimming', capturedAt: '2026-05-20T12:45:00' },
+  { id: 'BushTrim2.jpeg', kind: 'image', src: '/media/BushTrim2.jpeg', title: 'Bush Trim 2', serviceGroup: 'Bush Trimming', capturedAt: '2026-05-20T12:50:00' },
   { id: 'BushTrimming.jpeg', kind: 'image', src: '/media/BushTrimming.jpeg', title: 'Bush Trimming', serviceGroup: 'Bush Trimming', capturedAt: '2026-05-20T13:00:00' },
   { id: 'BushTrimming1.mp4', kind: 'video', src: '/media/BushTrimming1.mp4', title: 'Bush Trimming 1', serviceGroup: 'Bush Trimming', capturedAt: '2026-05-20T13:05:00' },
   { id: 'MainMulchingVideo.mp4', kind: 'video', src: '/media/MainMulchingVideo.mp4', title: 'Main Mulching Video', serviceGroup: 'Mulching', capturedAt: '2026-05-20T13:30:00' },
@@ -66,6 +70,8 @@ export const MEDIA_ITEMS: MediaItem[] = [
   { id: 'Weedwacking.BushTrimming1.jpeg', kind: 'image', src: '/media/Weedwacking.BushTrimming1.jpeg', title: 'Weedwacking and Bush Trimming', serviceGroup: 'Weedwacking', capturedAt: '2026-05-20T14:50:00' },
   { id: 'Weeding1.jpeg', kind: 'image', src: '/media/Weeding1.jpeg', title: 'Weeding 1', serviceGroup: 'Weeding', capturedAt: '2026-05-20T15:15:00' },
   { id: 'Weeding2.jpeg', kind: 'image', src: '/media/Weeding2.jpeg', title: 'Weeding 2', serviceGroup: 'Weeding', capturedAt: '2026-05-20T15:20:00' },
+  { id: 'HandyManJobMoving.jpeg', kind: 'image', src: '/media/HandyManJobMoving.jpeg', title: 'Handyman Moving Job', serviceGroup: 'Small Handyman Work', capturedAt: '2026-05-25T13:42:00' },
+  { id: 'HandyManJobMoving1.jpeg', kind: 'image', src: '/media/HandyManJobMoving1.jpeg', title: 'Handyman Moving Job 1', serviceGroup: 'Small Handyman Work', capturedAt: '2026-05-25T13:47:00' },
   { id: 'PoolCleanup.BushTrim.FurniturePowerwash.mp4', kind: 'video', src: '/media/PoolCleanup.BushTrim.FurniturePowerwash.mp4', title: 'Pool Cleanup, Bush Trim, and Furniture Powerwash', serviceGroup: 'Powerwashing', capturedAt: '2026-05-20T15:30:00' }
 ];
 
@@ -86,7 +92,7 @@ export const MEDIA_SECTIONS: MediaSection[] = [
     key: 'mowing',
     title: 'Mowing',
     description: 'Mowing footage shown with the same layout as the rest of the gallery.',
-    itemIds: ['Mowing.MP4']
+    itemIds: ['Mowing.MP4', 'Mow1.jpeg']
   },
   {
     key: 'weeding-mulching',
@@ -116,7 +122,7 @@ export const MEDIA_SECTIONS: MediaSection[] = [
     key: 'bush-trimming',
     title: 'Bush Trimming',
     description: 'Bush trimming photos and clips grouped together.',
-    itemIds: ['BushTrimming.jpeg', 'BushTrimming1.mp4', 'PineNeedle.BushTrim.jpeg']
+    itemIds: ['BushTrim.jpeg', 'BushTrim1.jpeg', 'BushTrim2.jpeg', 'BushTrimming.jpeg', 'BushTrimming1.mp4', 'PineNeedle.BushTrim.jpeg']
   },
   {
     key: 'mulching-hedge-trimming',
@@ -141,6 +147,12 @@ export const MEDIA_SECTIONS: MediaSection[] = [
     title: 'Powerwashing',
     description: 'A quick showcase of the powerwashing result.',
     itemIds: ['IMG_1028.JPG', 'PoolCleanup.BushTrim.FurniturePowerwash.mp4']
+  },
+  {
+    key: 'small-handyman-work',
+    title: 'Small Handyman Work',
+    description: 'Handyman moving and small repair photos grouped together.',
+    itemIds: ['HandyManJobMoving.jpeg', 'HandyManJobMoving1.jpeg']
   },
   {
     key: 'dead-plant-removal',

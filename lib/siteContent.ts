@@ -120,9 +120,9 @@ export const SERVICE_OPTIONS: ServiceCardContent[] = [
     estimateType: 'hourly',
     hourlyHours: [1, 4],
     featuredMedia: {
-      src: '/media/BrushRemoval.Weeding.Trimming.mp4',
-      kind: 'video',
-      alt: 'Brush removal, weeding, and trimming video'
+      src: '/media/HandyManJobMoving.jpeg',
+      kind: 'image',
+      alt: 'Handyman moving job photo'
     }
   }
 ];
