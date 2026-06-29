@@ -168,103 +168,122 @@ export const VALUE_PROPS = [
 
 export const TESTIMONIALS = [
   {
-    name: 'Brookville Client',
-    quote: 'Nathan did an amazing job on our yard in Brookville. He was professional, respectful, and treated the property with real care. The lawn looked clean, sharp, and well maintained.'
+    name: 'Katherine Grier',
+    area: "Settler's Landing",
+    postedAt: '3 days ago',
+    stars: 5,
+    quote: "Highly recommend! He was extremely prompt, very polite, and did a thorough job from start to finish. It's refreshing to work with someone who communicates well, shows up when they say they will, and takes pride in their work. He paid attention to the details and left everything looking great. If you're looking for a reliable landscaper, I would definitely recommend him!"
   },
   {
-    name: 'Old Westbury Client',
-    quote: 'Nathan helped us with mowing, trimming, and cleanup in Old Westbury, and the results were excellent. He showed up ready to work and left everything looking immaculate.'
+    name: 'Mary H.',
+    area: 'Fort Mill, SC',
+    postedAt: '5 days ago',
+    stars: 5,
+    quote: "We had an out-of-control garden that Nate handled professionally and with a fantastic attitude. I had a few additional requests and he responded with, 'I won't leave until you're 100% satisfied.' He's the best. I'm asking him to do some additional work for us. We were so pleased."
   },
   {
-    name: 'Manhasset Client',
-    quote: 'We hired Nathan for a yard cleanup in Manhasset, and he exceeded expectations. The edges were clean, the weeds were gone, and the whole property looked refreshed.'
+    name: 'Gordon S.',
+    area: 'White Oak',
+    postedAt: '5 days ago',
+    stars: 5,
+    quote: 'Nate is great! Pun intended. He is a sterling young man, prompt, keeps you updated, works hard, communicates, suggests and gets the job done. Easy going and all-round nice guy. His pricing is reasonable too. Highly recommend his services for your yard work. Work with him for a great experience.'
   },
   {
-    name: 'Sands Point Client',
-    quote: 'Nathan was easy to communicate with and did a great job on our landscaping in Sands Point. He paid attention to the small details that really make a yard look finished.'
+    name: 'Antonio Garrison',
+    area: 'Southampton',
+    postedAt: '18 Jun',
+    stars: 5,
+    quote: "Working with Nathan has really been a highlight. He's prompt, professional, keeps you updated, followed instructions on the scope/project, great work, and overall was great to work with. I have used his services quite a few times and plan to continue to do so. Thank you for all the work you've done for me thus far!"
   },
   {
-    name: 'Glen Head Client',
-    quote: 'Nathan came out to our home in Glen Head and completely cleaned up the front yard. The work was neat, efficient, and professional from start to finish.'
+    name: 'Anjana Bhawnani',
+    area: 'Heritage-Machado',
+    postedAt: '17 Jun',
+    stars: 5,
+    quote: 'Nathan was outstanding. My regular lawn service had not been out for quite some time, so the grass had become very overgrown. Despite the challenging condition of the yard, Nathan did an excellent job. He was punctual, his communication was prompt and professional, and his pricing was very fair considering the amount of work involved. He was courteous, reliable, and responsible throughout the entire process. Most importantly, the yard looks fantastic now. I highly recommend Nathan and would not hesitate to hire him again.'
   },
   {
-    name: 'Roslyn Client',
-    quote: 'I needed help with overgrown bushes and weeds in Roslyn, and Nathan handled everything perfectly. He worked hard and made the property look much more polished.'
+    name: 'Gina D.',
+    area: 'Ashton Grove',
+    postedAt: '12 Jun',
+    stars: 5,
+    quote: "Nate worked hard today to remove all weeds in my front and back gardens. It's 97 outside and he didn't stop once. I'm grateful for Nate's help and will definitely call him again. Thanks, Nate!"
   },
   {
-    name: 'Jericho Client',
-    quote: 'Nathan did a fantastic mulch job for us in Jericho. He was thorough, respectful, and made the whole front of the house look upgraded.'
+    name: 'Robin Lassiter',
+    area: 'Sardis Forest',
+    postedAt: '11 Jun',
+    stars: 5,
+    quote: 'Nathan was super! I have overgrown hedges and he was more than willing to tackle the job. Such a respectful and pleasant young man and VERY hard working. Highly recommended. Thank you, Nathan.'
   },
   {
-    name: 'Syosset Client',
-    quote: 'The LawnFather, led by Nathan, gave our yard in Syosset a complete refresh. The mowing, trimming, and cleanup were all done with care.'
+    name: 'Denise Arceneaux',
+    area: 'Idol Rock',
+    postedAt: '9 Jun',
+    stars: 5,
+    quote: "I highly recommend Nate for anyone looking for quality lawn care services. He did an exceptional job mowing and edging my yard today, and the results exceeded my expectations. His attention to detail, professionalism, and pride in his work were evident from start to finish. My lawn looks neat, clean, and beautifully maintained. The edging was crisp and precise, giving the entire yard a polished appearance. Nate was reliable, efficient, and left everything looking fantastic. I couldn't be happier with the outcome and will definitely be using his services again. If you're looking for someone who truly cares about the quality of their work, Nate is the person to call! Thank you, Nate, for a job well done!"
   },
   {
-    name: 'Oyster Bay Client',
-    quote: 'Nathan was professional and dependable. He came to our property in Oyster Bay and made the lawn look clean, even, and well kept.'
+    name: 'Richard Crenshaw',
+    area: 'Montibello',
+    postedAt: '2w',
+    stars: 5,
+    quote: 'I used Nate "The LawnFather" for the 3rd time today and he was excellent as usual. He trimmed shrubs, trees, worked on my bed edging and put out mulch. He is worth more than he charges.'
   },
   {
-    name: 'Locust Valley Client',
-    quote: 'We had Nathan help with weeding and general lawn care in Locust Valley. He was punctual, hardworking, and very detail oriented.'
+    name: 'Rick Garrett',
+    area: 'Old Salem/Meredith',
+    postedAt: '8 Jun',
+    stars: 5,
+    quote: "I couldn't recommend Nathan more for your yard work needs. After contacting him, he showed up within 24 hours and did a super amazing job tackling an overgrown, large and hilly yard in extreme heat. He is professional, kind and an overall pleasure to work with."
   },
   {
-    name: 'Hicksville Client',
-    quote: 'Nathan did an excellent job at our home in Hicksville. The yard went from messy to clean and presentable in one visit. Highly recommend his work.'
+    name: 'Heather McClure',
+    area: 'Providence Forest',
+    postedAt: '3 Jun',
+    stars: 5,
+    quote: 'Nathan is very thorough, hardworking, and a good communicator. He was a big help cleaning out some backyard overgrowth for us, glad to have found him.'
   },
   {
-    name: 'Muttontown Client',
-    quote: 'Nathan took care of our property in Muttontown and did an outstanding job. He clearly takes pride in his work, and it shows in the final result.'
+    name: 'Richard Crenshaw',
+    area: 'Montibello',
+    postedAt: '2 Jun',
+    stars: 5,
+    quote: 'Nathan does excellent work, I have used his services twice and plan another job for him next week.'
   },
   {
-    name: 'Matthews Client',
-    quote: 'We booked Nathan for lawn care in Matthews, NC, and he did not disappoint. Great communication, clean work, and a very professional attitude.'
+    name: 'Kim Powell',
+    area: 'Sharon Woods',
+    postedAt: '2 Jun',
+    stars: 5,
+    quote: 'Nathan was amazing! Very communicative, incredibly polite and hard working. He mowed, edged, trimmed bushes and blew off our yard and patio, all of which had been neglected for a month by our previous lawn guys. He worked in the unexpected rain, did more than I had asked for or expected and cleaned up after himself. All for a very reasonable price. So happy to support this young man and his small business. Will definitely use him again and recommend The LawnFather to neighbors and friends. Thank you Nathan!'
   },
   {
-    name: 'Charlotte Client',
-    quote: 'Nathan helped us clean up our yard in Charlotte, and the difference was huge. He worked efficiently and made everything look fresh again.'
+    name: 'Kurt Jacobs',
+    area: 'Providence Plantation',
+    postedAt: '1 Jun',
+    stars: 5,
+    quote: 'I would definitely hire Nathan again. He initially helped me clean the pool, trim hedges, clean up the yard. He is hardworking, dependable, respectful and communicates very well.'
   },
   {
-    name: 'Ballantyne Client',
-    quote: 'I hired Nathan for mowing and weed trimming in Ballantyne, and he did excellent work. The lawn looked sharp, and he left no mess behind.'
+    name: 'David Conner',
+    area: 'Stonecreek Ranch',
+    postedAt: '31 May',
+    stars: 5,
+    quote: 'Nathan did a fantastic job on our lawn. We reached out to him kind of last minute and he was very communicative and did exactly what he said! Great service and awesome performance!'
   },
   {
-    name: 'SouthPark Client',
-    quote: 'Nathan did a great job with our yard in SouthPark. He was respectful, focused, and made sure the property looked right before leaving.'
+    name: 'Kay L.',
+    area: 'International Dr',
+    postedAt: '30 May',
+    stars: 5,
+    quote: 'I found Nate last minute on the Nextdoor app when another helper canceled on me. He was punctual, professional, and very friendly. He handled moving everything with ease and made the process much less stressful. I really appreciated his reliability and positive attitude. I would definitely recommend Nate to anyone needing help with a move and would hire him again in the future!'
   },
   {
-    name: 'Indian Trail Client',
-    quote: 'We needed a full cleanup in Indian Trail, and Nathan came through. The LawnFather service was professional, reliable, and worth every penny.'
-  },
-  {
-    name: 'Mint Hill Client',
-    quote: 'Nathan handled our lawn care in Mint Hill, and the results were better than expected. Clean lines, careful trimming, and a very polished look.'
-  },
-  {
-    name: 'Huntersville Client',
-    quote: 'Nathan did a wonderful job on our property in Huntersville. He was communicative, hardworking, and made the yard look much healthier.'
-  },
-  {
-    name: 'Pineville Client',
-    quote: 'We had Nathan come out to our home in Pineville for mowing and cleanup. He was professional, quick, and very meticulous with the details.'
-  },
-  {
-    name: 'Concord Client',
-    quote: 'Nathan helped us with weeding and mulch in Concord, NC, and the yard looks beautiful. He brought everything back to life.'
-  },
-  {
-    name: 'Waxhaw Client',
-    quote: 'Nathan was great to work with in Waxhaw. He listened to what we needed, gave honest feedback, and delivered clean, high quality work.'
-  },
-  {
-    name: 'Weddington Client',
-    quote: 'The LawnFather did a great job at our home in Weddington, and Nathan was professional the entire time. The property looked clean and cared for.'
-  },
-  {
-    name: 'Mooresville Client',
-    quote: 'Nathan came to our house in Mooresville and made the yard look brand new. He was reliable, respectful, and clearly has a strong work ethic.'
-  },
-  {
-    name: 'Davidson Client',
-    quote: 'Nathan provided excellent lawn care service in Davidson. The whole process was simple, the communication was clear, and the final result looked pristine.'
+    name: 'Richard Crenshaw',
+    area: 'Montibello',
+    postedAt: '30 May',
+    stars: 5,
+    quote: 'I have used Nate twice and he is great.'
   }
 ];

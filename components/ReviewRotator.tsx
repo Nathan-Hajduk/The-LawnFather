@@ -32,11 +32,12 @@ export function ReviewRotator() {
       </div>
 
       <div className="relative min-h-[180px] rounded-[1.5rem] border border-white/5 bg-white/[0.03] p-6">
-        <article key={review.name} className="animate-fade-up">
+        <article key={`${review.name}-${review.postedAt}-${index}`} className="animate-fade-up">
           <p className="text-xs font-semibold uppercase tracking-[0.24em] text-emerald-800">Customer Feedback</p>
           <p className="mt-4 max-w-3xl text-lg leading-8 text-slate-800">“{review.quote}”</p>
           <p className="mt-5 text-sm font-semibold text-slate-900">{review.name}</p>
-          <p className="mt-1 text-xs uppercase tracking-[0.18em] text-slate-500">5 Stars</p>
+          <p className="mt-1 text-xs uppercase tracking-[0.18em] text-slate-500">{review.area} - {review.postedAt}</p>
+          <p className="mt-1 text-xs uppercase tracking-[0.18em] text-slate-500">{review.stars} Stars</p>
         </article>
 
         <div className="mt-6 flex items-center justify-between gap-4">
@@ -46,7 +47,7 @@ export function ReviewRotator() {
           <div className="flex gap-2" aria-label="Testimonial slide indicators">
             {TESTIMONIALS.map((item, testimonialIndex) => (
               <button
-                key={item.name}
+                key={`${item.name}-${item.postedAt}-${testimonialIndex}`}
                 type="button"
                 onClick={() => setIndex(testimonialIndex)}
                 className={`h-2.5 rounded-full transition ${testimonialIndex === index ? 'w-8 bg-emerald-300' : 'w-2.5 bg-white/25'}`}

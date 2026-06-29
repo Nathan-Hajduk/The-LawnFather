@@ -40,6 +40,9 @@ export default function HomePage() {
               <p className="mx-auto max-w-3xl text-base leading-8 text-slate-700 sm:text-lg">
                 Mowing, trimming, weeding, mulching, gardening, powerwashing, and small property projects handled with clear communication, fair pricing, and clean results.
               </p>
+                    <p className="mx-auto max-w-3xl text-center text-lg font-black uppercase tracking-[0.08em] text-emerald-900 sm:text-xl">
+                      Trusted by 40+ neighbors on Nextdoor to maintain their properties.
+                    </p>
             </div>
 
             <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
@@ -135,3 +138,4 @@ export default function HomePage() {
     </div>
   );
 }
+
