@@ -53,6 +53,9 @@ export const MEDIA_ITEMS: MediaItem[] = [
   { id: 'AboutUs5.JPG', kind: 'image', src: '/media/AboutUs5.JPG', title: 'About Us 5', serviceGroup: 'About The LawnFather', capturedAt: '2026-05-20T11:15:00' },
   { id: 'Mowing.MP4', kind: 'video', src: '/media/Mowing.MP4', title: 'Mowing', serviceGroup: 'Mowing', capturedAt: '2026-05-20T12:00:00' },
   { id: 'Mow1.jpeg', kind: 'image', src: '/media/Mow1.jpeg', title: 'Mowing 1', serviceGroup: 'Mowing', capturedAt: '2026-05-31T10:00:00' },
+  { id: 'MowJob1.JPG', kind: 'image', src: '/media/MowJob1.JPG', title: 'Mowing job 1', serviceGroup: 'Mowing', capturedAt: '2026-06-01T10:00:00' },
+  { id: 'MowJob2.JPG', kind: 'image', src: '/media/MowJob2.JPG', title: 'Mowing job 2', serviceGroup: 'Mowing', capturedAt: '2026-06-01T10:05:00' },
+  { id: 'MowJob3.JPG', kind: 'image', src: '/media/MowJob3.JPG', title: 'Mowing job 3', serviceGroup: 'Mowing', capturedAt: '2026-06-01T10:10:00' },
   { id: 'BrushRemoval.Weeding.Trimming.mp4', kind: 'video', src: '/media/BrushRemoval.Weeding.Trimming.mp4', title: 'Brush Removal, Weeding, and Trimming', serviceGroup: 'Brush Removal, Weeding & Trimming', capturedAt: '2026-05-20T12:30:00' },
   { id: 'BushTrim.jpeg', kind: 'image', src: '/media/BushTrim.jpeg', title: 'Bush Trim', serviceGroup: 'Bush Trimming', capturedAt: '2026-05-20T12:40:00' },
   { id: 'BushTrim1.jpeg', kind: 'image', src: '/media/BushTrim1.jpeg', title: 'Bush Trim 1', serviceGroup: 'Bush Trimming', capturedAt: '2026-05-20T12:45:00' },
@@ -68,10 +71,22 @@ export const MEDIA_ITEMS: MediaItem[] = [
   { id: 'GardneringAeration1.jpeg', kind: 'image', src: '/media/GardneringAeration1.jpeg', title: 'Gardening Aeration', serviceGroup: 'Gardening & Aeration', capturedAt: '2026-05-20T14:30:00' },
   { id: 'Weedwacking.jpeg', kind: 'image', src: '/media/Weedwacking.jpeg', title: 'Weedwacking', serviceGroup: 'Weedwacking', capturedAt: '2026-05-20T14:45:00' },
   { id: 'Weedwacking.BushTrimming1.jpeg', kind: 'image', src: '/media/Weedwacking.BushTrimming1.jpeg', title: 'Weedwacking and Bush Trimming', serviceGroup: 'Weedwacking', capturedAt: '2026-05-20T14:50:00' },
+  { id: 'MowWeedWackJob1.JPG', kind: 'image', src: '/media/MowWeedWackJob1.JPG', title: 'Mowing and Weedwacking job 1', serviceGroup: 'Weedwacking', capturedAt: '2026-06-01T10:15:00' },
+  { id: 'MowWeedWackJob2.JPG', kind: 'image', src: '/media/MowWeedWackJob2.JPG', title: 'Mowing and Weedwacking job 2', serviceGroup: 'Weedwacking', capturedAt: '2026-06-01T10:20:00' },
   { id: 'Weeding1.jpeg', kind: 'image', src: '/media/Weeding1.jpeg', title: 'Weeding 1', serviceGroup: 'Weeding', capturedAt: '2026-05-20T15:15:00' },
   { id: 'Weeding2.jpeg', kind: 'image', src: '/media/Weeding2.jpeg', title: 'Weeding 2', serviceGroup: 'Weeding', capturedAt: '2026-05-20T15:20:00' },
   { id: 'HandyManJobMoving.jpeg', kind: 'image', src: '/media/HandyManJobMoving.jpeg', title: 'Handyman Moving Job', serviceGroup: 'Small Handyman Work', capturedAt: '2026-05-25T13:42:00' },
   { id: 'HandyManJobMoving1.jpeg', kind: 'image', src: '/media/HandyManJobMoving1.jpeg', title: 'Handyman Moving Job 1', serviceGroup: 'Small Handyman Work', capturedAt: '2026-05-25T13:47:00' },
+  { id: 'MulchJob1.JPG', kind: 'image', src: '/media/MulchJob1.JPG', title: 'Mulching job 1', serviceGroup: 'Mulching', capturedAt: '2026-06-01T10:25:00' },
+  { id: 'MulchJob2.JPG', kind: 'image', src: '/media/MulchJob2.JPG', title: 'Mulching job 2', serviceGroup: 'Mulching', capturedAt: '2026-06-01T10:30:00' },
+  { id: 'MulchJob3.JPG', kind: 'image', src: '/media/MulchJob3.JPG', title: 'Mulching job 3', serviceGroup: 'Mulching', capturedAt: '2026-06-01T10:35:00' },
+  { id: 'MulchJob4.JPG', kind: 'image', src: '/media/MulchJob4.JPG', title: 'Mulching job 4', serviceGroup: 'Mulching', capturedAt: '2026-06-01T10:40:00' },
+  { id: 'MulchJob5.JPG', kind: 'image', src: '/media/MulchJob5.JPG', title: 'Mulching job 5', serviceGroup: 'Mulching', capturedAt: '2026-06-01T10:45:00' },
+  { id: 'MulchJob6.JPG', kind: 'image', src: '/media/MulchJob6.JPG', title: 'Mulching job 6', serviceGroup: 'Mulching', capturedAt: '2026-06-01T10:50:00' },
+  { id: 'MulchJob7.JPG', kind: 'image', src: '/media/MulchJob7.JPG', title: 'Mulching job 7', serviceGroup: 'Mulching', capturedAt: '2026-06-01T10:55:00' },
+  { id: 'MulchJob8.JPG', kind: 'image', src: '/media/MulchJob8.JPG', title: 'Mulching job 8', serviceGroup: 'Mulching', capturedAt: '2026-06-01T11:00:00' },
+  { id: 'MulchJob9.JPG', kind: 'image', src: '/media/MulchJob9.JPG', title: 'Mulching job 9', serviceGroup: 'Mulching', capturedAt: '2026-06-01T11:05:00' },
+  { id: 'MulchJob10.JPG', kind: 'image', src: '/media/MulchJob10.JPG', title: 'Mulching job 10', serviceGroup: 'Mulching', capturedAt: '2026-06-01T11:10:00' },
   { id: 'PoolCleanup.BushTrim.FurniturePowerwash.mp4', kind: 'video', src: '/media/PoolCleanup.BushTrim.FurniturePowerwash.mp4', title: 'Pool Cleanup, Bush Trim, and Furniture Powerwash', serviceGroup: 'Powerwashing', capturedAt: '2026-05-20T15:30:00' }
 ];
 
@@ -92,7 +107,7 @@ export const MEDIA_SECTIONS: MediaSection[] = [
     key: 'mowing',
     title: 'Mowing',
     description: 'Mowing footage shown with the same layout as the rest of the gallery.',
-    itemIds: ['Mowing.MP4', 'Mow1.jpeg']
+    itemIds: ['Mowing.MP4', 'Mow1.jpeg', 'MowJob1.JPG', 'MowJob2.JPG', 'MowJob3.JPG']
   },
   {
     key: 'weeding-mulching',
@@ -110,7 +125,7 @@ export const MEDIA_SECTIONS: MediaSection[] = [
     key: 'weedwacking',
     title: 'Weedwacking',
     description: 'Weedwacking and combined trimming images organized under one category.',
-    itemIds: ['Weedwacking.jpeg', 'Weedwacking.BushTrimming1.jpeg']
+    itemIds: ['Weedwacking.jpeg', 'Weedwacking.BushTrimming1.jpeg', 'MowWeedWackJob1.JPG', 'MowWeedWackJob2.JPG']
   },
   {
     key: 'weeding',
@@ -134,7 +149,7 @@ export const MEDIA_SECTIONS: MediaSection[] = [
     key: 'mulching-videos',
     title: 'Mulching',
     description: 'Fresh mulch installs and mulching videos grouped by title.',
-    itemIds: ['MainMulchingVideo.mp4', 'Mulching3.mp4', 'IMG_1099.mp4', 'IMG_1100.mp4']
+    itemIds: ['MainMulchingVideo.mp4', 'Mulching3.mp4', 'IMG_1099.mp4', 'IMG_1100.mp4', 'MulchJob1.JPG', 'MulchJob2.JPG', 'MulchJob3.JPG', 'MulchJob4.JPG', 'MulchJob5.JPG', 'MulchJob6.JPG', 'MulchJob7.JPG', 'MulchJob8.JPG', 'MulchJob9.JPG', 'MulchJob10.JPG']
   },
   {
     key: 'gardening-aeration',
