@@ -33,9 +33,9 @@ export const SERVICE_OPTIONS: ServiceCardContent[] = [
     pricingNote: 'Custom quote based on property size and job scope.',
     estimateType: 'custom',
     featuredMedia: {
-      src: '/media/Mowing.MP4',
+      src: '/media/mowing-front-yard-walkthrough-12.mp4',
       kind: 'video',
-      alt: 'Mowing service video'
+      alt: 'Front yard mowing walkthrough video'
     }
   },
   {
@@ -70,9 +70,9 @@ export const SERVICE_OPTIONS: ServiceCardContent[] = [
     pricingNote: 'Custom quote based on property size and job scope.',
     estimateType: 'custom',
     featuredMedia: {
-      src: '/media/BushTrimming.jpeg',
+      src: '/media/trimming-front-landscape-bushes-06.jpeg',
       kind: 'image',
-      alt: 'Bush trimming service photo'
+      alt: 'Front landscape bushes after trimming'
     }
   },
   {
@@ -82,9 +82,9 @@ export const SERVICE_OPTIONS: ServiceCardContent[] = [
     pricingNote: 'Custom quote based on property size and job scope.',
     estimateType: 'custom',
     featuredMedia: {
-      src: '/media/MainMulchingVideo.mp4',
-      kind: 'video',
-      alt: 'Mulching service video'
+      src: '/media/mulching-front-foundation-bed-01.jpeg',
+      kind: 'image',
+      alt: 'Front foundation bed with fresh mulch'
     }
   },
   {
@@ -95,9 +95,9 @@ export const SERVICE_OPTIONS: ServiceCardContent[] = [
     estimateType: 'hourly',
     hourlyHours: [2, 5],
     featuredMedia: {
-      src: '/media/GardneringAeration1.jpeg',
+      src: '/media/planting-side-yard-after-tree-installation-02.jpeg',
       kind: 'image',
-      alt: 'Gardening and aeration photo'
+      alt: 'Side yard planting and tree installation result'
     }
   },
   {
@@ -107,9 +107,9 @@ export const SERVICE_OPTIONS: ServiceCardContent[] = [
     pricingNote: 'Custom quote based on property size and job scope.',
     estimateType: 'custom',
     featuredMedia: {
-      src: '/media/PoolCleanup.BushTrim.FurniturePowerwash.mp4',
-      kind: 'video',
-      alt: 'Powerwashing and cleanup video'
+      src: '/media/powerwashing-curved-walkway-01.jpeg',
+      kind: 'image',
+      alt: 'Curved walkway after powerwashing'
     }
   },
   {

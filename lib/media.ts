@@ -18,6 +18,98 @@ export type MediaSection = {
 
 export const ABOUT_US_MEDIA_IDS = ['AboutUs1.JPG', 'AboutUs2.WEBP', 'AboutUs4.JPG', 'AboutUs5.JPG'];
 
+type PreparedMediaSeed = {
+  id: string;
+  kind: MediaKind;
+  serviceGroup: string;
+  capturedAt: string;
+};
+
+function buildPreparedMediaTitle(id: string, kind: MediaKind) {
+  const baseName = id
+    .replace(/\.[^.]+$/, '')
+    .replace(/^(mowing|trimming|mulching|powerwashing|planting)-/i, '')
+    .replace(/[-_.]+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+  const title = baseName.replace(/\b\w/g, (character) => character.toUpperCase());
+  return kind === 'video' && !title.toLowerCase().includes('video') ? `${title} video` : title;
+}
+
+function createPreparedMediaItem(seed: PreparedMediaSeed): MediaItem {
+  return {
+    id: seed.id,
+    kind: seed.kind,
+    src: `/media/${seed.id}`,
+    title: buildPreparedMediaTitle(seed.id, seed.kind),
+    serviceGroup: seed.serviceGroup,
+    capturedAt: seed.capturedAt
+  };
+}
+
+const PREPARED_MOWING_MEDIA: PreparedMediaSeed[] = [
+  { id: 'mowing-backyard-evergreen-border-13.jpeg', kind: 'image', serviceGroup: 'Mowing', capturedAt: '2026-08-01T09:00:00' },
+  { id: 'mowing-corner-lot-front-yard-01.jpeg', kind: 'image', serviceGroup: 'Mowing', capturedAt: '2026-08-01T09:05:00' },
+  { id: 'mowing-curved-front-yard-11.jpeg', kind: 'image', serviceGroup: 'Mowing', capturedAt: '2026-08-01T09:10:00' },
+  { id: 'mowing-driveway-side-yard-10.jpeg', kind: 'image', serviceGroup: 'Mowing', capturedAt: '2026-08-01T09:15:00' },
+  { id: 'mowing-front-yard-fresh-cut-02.jpeg', kind: 'image', serviceGroup: 'Mowing', capturedAt: '2026-08-01T09:20:00' },
+  { id: 'mowing-front-yard-stripes-06.jpeg', kind: 'image', serviceGroup: 'Mowing', capturedAt: '2026-08-01T09:25:00' },
+  { id: 'mowing-front-yard-tree-09.jpeg', kind: 'image', serviceGroup: 'Mowing', capturedAt: '2026-08-01T09:30:00' },
+  { id: 'mowing-front-yard-walkthrough-12.mp4', kind: 'video', serviceGroup: 'Mowing', capturedAt: '2026-08-01T09:35:00' },
+  { id: 'mowing-large-backyard-07.jpeg', kind: 'image', serviceGroup: 'Mowing', capturedAt: '2026-08-01T09:40:00' },
+  { id: 'mowing-lawnfather-business-card-08.jpeg', kind: 'image', serviceGroup: 'Mowing', capturedAt: '2026-08-01T09:45:00' },
+  { id: 'mowing-shaded-side-yard-03.jpeg', kind: 'image', serviceGroup: 'Mowing', capturedAt: '2026-08-01T09:50:00' },
+  { id: 'mowing-sloped-front-yard-05.jpeg', kind: 'image', serviceGroup: 'Mowing', capturedAt: '2026-08-01T09:55:00' },
+  { id: 'mowing-wooded-backyard-04.jpeg', kind: 'image', serviceGroup: 'Mowing', capturedAt: '2026-08-01T10:00:00' }
+];
+
+const PREPARED_TRIMMING_MEDIA: PreparedMediaSeed[] = [
+  { id: 'trimming-backyard-hedge-10.jpeg', kind: 'image', serviceGroup: 'Trimming', capturedAt: '2026-08-02T09:00:00' },
+  { id: 'trimming-backyard-privacy-shrubs-01.jpeg', kind: 'image', serviceGroup: 'Trimming', capturedAt: '2026-08-02T09:05:00' },
+  { id: 'trimming-driveway-shrub-row-12.jpeg', kind: 'image', serviceGroup: 'Trimming', capturedAt: '2026-08-02T09:10:00' },
+  { id: 'trimming-driveway-shrub-row-13.jpeg', kind: 'image', serviceGroup: 'Trimming', capturedAt: '2026-08-02T09:15:00' },
+  { id: 'trimming-driveway-shrub-row-14.jpeg', kind: 'image', serviceGroup: 'Trimming', capturedAt: '2026-08-02T09:20:00' },
+  { id: 'trimming-driveway-shrub-row-15.jpeg', kind: 'image', serviceGroup: 'Trimming', capturedAt: '2026-08-02T09:25:00' },
+  { id: 'trimming-driveway-shrub-row-16.jpeg', kind: 'image', serviceGroup: 'Trimming', capturedAt: '2026-08-02T09:30:00' },
+  { id: 'trimming-driveway-shrub-row-17.jpeg', kind: 'image', serviceGroup: 'Trimming', capturedAt: '2026-08-02T09:35:00' },
+  { id: 'trimming-front-foundation-shrubs-02.jpeg', kind: 'image', serviceGroup: 'Trimming', capturedAt: '2026-08-02T09:40:00' },
+  { id: 'trimming-front-landscape-bushes-06.jpeg', kind: 'image', serviceGroup: 'Trimming', capturedAt: '2026-08-02T09:45:00' },
+  { id: 'trimming-front-landscape-bushes-07.jpeg', kind: 'image', serviceGroup: 'Trimming', capturedAt: '2026-08-02T09:50:00' },
+  { id: 'trimming-front-porch-boxwoods-08.jpeg', kind: 'image', serviceGroup: 'Trimming', capturedAt: '2026-08-02T09:55:00' },
+  { id: 'trimming-front-yard-shrubs-04.jpeg', kind: 'image', serviceGroup: 'Trimming', capturedAt: '2026-08-02T10:00:00' },
+  { id: 'trimming-garden-boxwoods-11.jpeg', kind: 'image', serviceGroup: 'Trimming', capturedAt: '2026-08-02T10:05:00' },
+  { id: 'trimming-large-foundation-shrubs-03.jpeg', kind: 'image', serviceGroup: 'Trimming', capturedAt: '2026-08-02T10:10:00' },
+  { id: 'trimming-rounded-garage-boxwood-09.jpeg', kind: 'image', serviceGroup: 'Trimming', capturedAt: '2026-08-02T10:15:00' },
+  { id: 'trimming-side-yard-shrub-row-05.jpeg', kind: 'image', serviceGroup: 'Trimming', capturedAt: '2026-08-02T10:20:00' }
+];
+
+const PREPARED_MULCHING_MEDIA: PreparedMediaSeed[] = [
+  { id: 'mulching-front-foundation-bed-01.jpeg', kind: 'image', serviceGroup: 'Mulching', capturedAt: '2026-08-03T09:00:00' },
+  { id: 'mulching-side-foundation-bed-02.jpeg', kind: 'image', serviceGroup: 'Mulching', capturedAt: '2026-08-03T09:05:00' },
+  { id: 'mulching-side-yard-pine-needles-03.jpeg', kind: 'image', serviceGroup: 'Mulching', capturedAt: '2026-08-03T09:10:00' }
+];
+
+const PREPARED_POWERWASHING_MEDIA: PreparedMediaSeed[] = [
+  { id: 'powerwashing-brick-front-steps-03.jpeg', kind: 'image', serviceGroup: 'Powerwashing', capturedAt: '2026-08-04T09:00:00' },
+  { id: 'powerwashing-covered-patio-04.jpeg', kind: 'image', serviceGroup: 'Powerwashing', capturedAt: '2026-08-04T09:05:00' },
+  { id: 'powerwashing-curved-walkway-01.jpeg', kind: 'image', serviceGroup: 'Powerwashing', capturedAt: '2026-08-04T09:10:00' },
+  { id: 'powerwashing-curved-walkway-02.jpeg', kind: 'image', serviceGroup: 'Powerwashing', capturedAt: '2026-08-04T09:15:00' }
+];
+
+const PREPARED_PLANTING_MEDIA: PreparedMediaSeed[] = [
+  { id: 'planting-side-yard-after-tree-installation-02.jpeg', kind: 'image', serviceGroup: 'Planting', capturedAt: '2026-08-05T09:00:00' },
+  { id: 'planting-side-yard-before-tree-installation-01.jpeg', kind: 'image', serviceGroup: 'Planting', capturedAt: '2026-08-05T09:05:00' }
+];
+
+const PREPARED_MEDIA_ITEMS = [
+  ...PREPARED_MOWING_MEDIA.map(createPreparedMediaItem),
+  ...PREPARED_TRIMMING_MEDIA.map(createPreparedMediaItem),
+  ...PREPARED_MULCHING_MEDIA.map(createPreparedMediaItem),
+  ...PREPARED_POWERWASHING_MEDIA.map(createPreparedMediaItem),
+  ...PREPARED_PLANTING_MEDIA.map(createPreparedMediaItem)
+];
+
 export const MEDIA_ITEMS: MediaItem[] = [
   { id: 'IMG_8368.JPG', kind: 'image', src: '/media/IMG_8368.JPG', title: 'Lawn cleanup', serviceGroup: 'Lawn Cleanup', capturedAt: '2025-05-10T13:46:39' },
   { id: 'IMG_0474.mp4', kind: 'video', src: '/media/IMG_0474.mp4', title: 'Weeding & Mulching', serviceGroup: 'Weeding & Mulching', capturedAt: '2025-06-06T15:41:24' },
@@ -87,7 +179,8 @@ export const MEDIA_ITEMS: MediaItem[] = [
   { id: 'MulchJob8.JPG', kind: 'image', src: '/media/MulchJob8.JPG', title: 'Mulching job 8', serviceGroup: 'Mulching', capturedAt: '2026-06-01T11:00:00' },
   { id: 'MulchJob9.JPG', kind: 'image', src: '/media/MulchJob9.JPG', title: 'Mulching job 9', serviceGroup: 'Mulching', capturedAt: '2026-06-01T11:05:00' },
   { id: 'MulchJob10.JPG', kind: 'image', src: '/media/MulchJob10.JPG', title: 'Mulching job 10', serviceGroup: 'Mulching', capturedAt: '2026-06-01T11:10:00' },
-  { id: 'PoolCleanup.BushTrim.FurniturePowerwash.mp4', kind: 'video', src: '/media/PoolCleanup.BushTrim.FurniturePowerwash.mp4', title: 'Pool Cleanup, Bush Trim, and Furniture Powerwash', serviceGroup: 'Powerwashing', capturedAt: '2026-05-20T15:30:00' }
+  { id: 'PoolCleanup.BushTrim.FurniturePowerwash.mp4', kind: 'video', src: '/media/PoolCleanup.BushTrim.FurniturePowerwash.mp4', title: 'Pool Cleanup, Bush Trim, and Furniture Powerwash', serviceGroup: 'Powerwashing', capturedAt: '2026-05-20T15:30:00' },
+  ...PREPARED_MEDIA_ITEMS
 ];
 
 export const MEDIA_SECTIONS: MediaSection[] = [
@@ -186,6 +279,36 @@ export const MEDIA_SECTIONS: MediaSection[] = [
     title: 'Planting',
     description: 'Planting photos gathered from the new uploads.',
     itemIds: ['Planting.Weeding.jpeg', 'Planting2.jpeg', 'Planting.jpeg']
+  },
+  {
+    key: 'prepared-mowing',
+    title: 'Mowing',
+    description: 'The new prepared mowing photos and the walkthrough clip.',
+    itemIds: PREPARED_MOWING_MEDIA.map((item) => item.id)
+  },
+  {
+    key: 'prepared-trimming',
+    title: 'Trimming',
+    description: 'The new prepared trimming photos from the latest upload.',
+    itemIds: PREPARED_TRIMMING_MEDIA.map((item) => item.id)
+  },
+  {
+    key: 'prepared-mulching',
+    title: 'Mulching',
+    description: 'The new prepared mulching photos from the latest upload.',
+    itemIds: PREPARED_MULCHING_MEDIA.map((item) => item.id)
+  },
+  {
+    key: 'prepared-powerwashing',
+    title: 'Powerwashing',
+    description: 'The new prepared powerwashing photos from the latest upload.',
+    itemIds: PREPARED_POWERWASHING_MEDIA.map((item) => item.id)
+  },
+  {
+    key: 'prepared-planting',
+    title: 'Planting',
+    description: 'The new prepared planting photos from the latest upload.',
+    itemIds: PREPARED_PLANTING_MEDIA.map((item) => item.id)
   },
   {
     key: 'flower-bed-installation',

@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { quoteRequestSchema } from '@/lib/quoteSchema';
 import { sendQuoteEmail } from '@/lib/email';
+import { validateQuotePhotos, type QuotePhotoIssue } from '@/lib/quoteUpload';
 
 export const runtime = 'nodejs';
 
@@ -54,9 +55,21 @@ export async function POST(request: Request) {
       : quoteRequestSchema.safeParse(payload);
 
     if (payload instanceof FormData) {
-      for (const file of payload.getAll('photos')) {
-        if (!(file instanceof File) || file.size === 0) continue;
+      const photoFiles = payload.getAll('photos').filter((value): value is File => value instanceof File && value.size > 0);
+      const photoValidation = validateQuotePhotos(photoFiles);
 
+      if (!photoValidation.isValid) {
+        const photoIssues = photoValidation.issues as QuotePhotoIssue[];
+        return NextResponse.json(
+          {
+            message: photoIssues.map((issue) => issue.message).join(' ') || 'One or more photo uploads are not supported.',
+            photoIssues
+          },
+          { status: 400 }
+        );
+      }
+
+      for (const file of photoFiles) {
         attachments.push({
           filename: file.name || 'photo.jpg',
           content: Buffer.from(await file.arrayBuffer()),
@@ -79,6 +92,6 @@ export async function POST(request: Request) {
     return NextResponse.json({ message: 'Your quote request was sent successfully.' }, { status: 200 });
   } catch (error) {
     console.error('Quote API error:', error);
-    return NextResponse.json({ message: 'We could not send your quote request right now. Please try again soon.' }, { status: 500 });
+    return NextResponse.json({ message: 'We could not send your quote request right now. Please text your photos to 980-339-6491 and try again soon.' }, { status: 500 });
   }
 }

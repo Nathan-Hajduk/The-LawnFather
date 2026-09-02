@@ -3,6 +3,7 @@
 import { useMemo, useState } from 'react';
 import { Loader2 } from 'lucide-react';
 import { estimateQuote } from '@/lib/quoteEstimator';
+import { QUOTE_PHOTO_LIMITS, type QuotePhotoIssue, validateQuotePhotos } from '@/lib/quoteUpload';
 import { SERVICE_OPTIONS, type ServiceKey } from '@/lib/siteContent';
 
 type QuoteFormProps = {
@@ -27,6 +28,11 @@ type FormState = {
 
 type FormErrors = Partial<Record<keyof FormState, string>>;
 
+type PreparedUpload = {
+  files: File[];
+  issues: QuotePhotoIssue[];
+};
+
 const PROPERTY_SIZE_OPTIONS: Array<{ value: FormState['propertySize']; label: string; detail: string }> = [
   { value: 'small', label: 'Small', detail: 'Under 1 acre' },
   { value: 'medium', label: 'Medium', detail: '1-2 acres' },
@@ -41,6 +47,13 @@ const CONTACT_OPTIONS: Array<{ value: FormState['preferredContactMethod']; label
 
 const ZIP_PATTERN = /^\d{5}(?:-\d{4})?$/;
 const PHONE_PATTERN = /^[0-9()+\-\s.]{7,}$/;
+const UPLOAD_FALLBACK_MESSAGE = 'If the upload keeps failing, text your photos to 980-339-6491.';
+
+function formatFileSize(bytes: number) {
+  if (bytes < 1024) return `${bytes} B`;
+  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+}
 
 function createInitialState(initialServiceSlug?: ServiceKey): FormState {
   return {
@@ -80,9 +93,61 @@ function validateForm(values: FormState) {
   return errors;
 }
 
+async function compressImageForUpload(file: File) {
+  if (!file.type.startsWith('image/')) return file;
+
+  try {
+    const imageBitmap = await createImageBitmap(file);
+    const maxDimension = 1800;
+    const scale = Math.min(1, maxDimension / Math.max(imageBitmap.width, imageBitmap.height));
+    const canvas = document.createElement('canvas');
+    canvas.width = Math.max(1, Math.round(imageBitmap.width * scale));
+    canvas.height = Math.max(1, Math.round(imageBitmap.height * scale));
+
+    const context = canvas.getContext('2d');
+    if (!context) {
+      imageBitmap.close();
+      return file;
+    }
+
+    context.drawImage(imageBitmap, 0, 0, canvas.width, canvas.height);
+    imageBitmap.close();
+
+    const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, 'image/jpeg', 0.82));
+    if (!blob) return file;
+
+    const compressedName = `${file.name.replace(/\.[^.]+$/, '')}.jpg`;
+    return new File([blob], compressedName, { type: 'image/jpeg', lastModified: file.lastModified });
+  } catch {
+    return file;
+  }
+}
+
+async function prepareUploads(files: File[]): Promise<PreparedUpload> {
+  const preparedFiles: File[] = [];
+
+  for (const file of files) {
+    preparedFiles.push(await compressImageForUpload(file));
+  }
+
+  const validation = validateQuotePhotos(preparedFiles);
+  return {
+    files: validation.isValid ? preparedFiles : [],
+    issues: validation.issues
+  };
+}
+
+function buildUploadStatusMessage(issues: QuotePhotoIssue[]) {
+  const fileMessages = issues.filter((issue) => issue.filename).map((issue) => issue.message);
+  const generalMessages = issues.filter((issue) => !issue.filename).map((issue) => issue.message);
+
+  return [...fileMessages, ...generalMessages, UPLOAD_FALLBACK_MESSAGE].join(' ');
+}
+
 export function QuoteForm({ initialServiceSlug }: QuoteFormProps) {
   const [formState, setFormState] = useState<FormState>(() => createInitialState(initialServiceSlug));
   const [selectedPhotos, setSelectedPhotos] = useState<File[]>([]);
+  const [photoIssues, setPhotoIssues] = useState<QuotePhotoIssue[]>([]);
   const [formErrors, setFormErrors] = useState<FormErrors>({});
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [statusMessage, setStatusMessage] = useState('');
@@ -118,12 +183,16 @@ export function QuoteForm({ initialServiceSlug }: QuoteFormProps) {
 
   function handlePhotoUpload(files: FileList | null) {
     setSelectedPhotos(files ? Array.from(files) : []);
+    setPhotoIssues([]);
+    setSubmitStatus('idle');
+    setStatusMessage('');
   }
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setSubmitStatus('idle');
     setStatusMessage('');
+    setPhotoIssues([]);
 
     const nextErrors = validateForm(formState);
     if (formState.honeypot.trim()) {
@@ -142,6 +211,14 @@ export function QuoteForm({ initialServiceSlug }: QuoteFormProps) {
     setIsSubmitting(true);
 
     try {
+      const preparedUploads = await prepareUploads(selectedPhotos);
+      if (preparedUploads.issues.length > 0) {
+        setPhotoIssues(preparedUploads.issues);
+        setSubmitStatus('error');
+        setStatusMessage(buildUploadStatusMessage(preparedUploads.issues));
+        return;
+      }
+
       const payload = new FormData();
       payload.append('fullName', sanitizeText(formState.fullName));
       payload.append('email', sanitizeText(formState.email));
@@ -156,18 +233,20 @@ export function QuoteForm({ initialServiceSlug }: QuoteFormProps) {
       payload.append('preferredContactMethod', formState.preferredContactMethod);
       payload.append('preferredDateTime', formState.preferredDateTime);
       payload.append('honeypot', formState.honeypot);
-      selectedPhotos.forEach((photo) => payload.append('photos', photo));
+      preparedUploads.files.forEach((photo) => payload.append('photos', photo));
 
       const response = await fetch('/api/quote', {
         method: 'POST',
-        body: payload
+        body: payload,
+        credentials: 'same-origin'
       });
 
-      const responseBody = (await response.json().catch(() => ({}))) as { message?: string };
+      const responseBody = (await response.json().catch(() => ({}))) as { message?: string; photoIssues?: QuotePhotoIssue[] };
 
       if (!response.ok) {
         setSubmitStatus('error');
         setStatusMessage(responseBody.message ?? 'Something went wrong while sending your request.');
+        setPhotoIssues(responseBody.photoIssues ?? []);
         return;
       }
 
@@ -175,10 +254,11 @@ export function QuoteForm({ initialServiceSlug }: QuoteFormProps) {
       setStatusMessage(responseBody.message ?? 'Your quote request was sent successfully.');
       setFormState(createInitialState(initialServiceSlug));
       setSelectedPhotos([]);
+      setPhotoIssues([]);
       setFormErrors({});
     } catch {
       setSubmitStatus('error');
-      setStatusMessage('Something went wrong while sending your request.');
+      setStatusMessage(`Something went wrong while sending your request. ${UPLOAD_FALLBACK_MESSAGE}`);
     } finally {
       setIsSubmitting(false);
     }
@@ -186,7 +266,13 @@ export function QuoteForm({ initialServiceSlug }: QuoteFormProps) {
 
   return (
     <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
-      <form onSubmit={onSubmit} className="glass-panel-strong space-y-6 p-6 sm:p-8">
+      <form
+        action="/api/quote"
+        encType="multipart/form-data"
+        method="post"
+        onSubmit={onSubmit}
+        className="glass-panel-strong space-y-6 p-6 sm:p-8"
+      >
         <div className="grid gap-6 sm:grid-cols-2">
           <div>
             <label className="label-text" htmlFor="fullName">Full Name</label>
@@ -285,16 +371,43 @@ export function QuoteForm({ initialServiceSlug }: QuoteFormProps) {
 
         <div>
           <label className="label-text" htmlFor="photos">Upload Photos</label>
-          <input id="photos" type="file" accept="image/*" multiple onChange={(event) => handlePhotoUpload(event.target.files)} className="input-shell py-3" />
-          <p className="mt-2 text-xs leading-5 text-slate-500">Upload one or more photos of the area you need worked on.</p>
+          <input
+            id="photos"
+            name="photos"
+            type="file"
+            accept="image/jpeg,image/png,image/webp,image/heic,image/heif"
+            multiple
+            onChange={(event) => handlePhotoUpload(event.target.files)}
+            className="input-shell py-3"
+          />
+          <p className="mt-2 text-xs leading-5 text-slate-500">
+            Upload up to {QUOTE_PHOTO_LIMITS.maxFiles} photos. Supported formats: JPEG, PNG, WebP, HEIC, and HEIF. Images are compressed before sending when possible.
+          </p>
           {selectedPhotos.length > 0 ? (
             <ul className="mt-3 space-y-2 text-sm text-slate-700">
               {selectedPhotos.map((photo) => (
                 <li key={`${photo.name}-${photo.size}`} className="rounded-2xl border border-slate-200 bg-white px-4 py-3">
-                  {photo.name}
+                  <div className="flex items-start justify-between gap-4">
+                    <span className="font-medium text-slate-900">{photo.name}</span>
+                    <span className="shrink-0 text-xs text-slate-500">{formatFileSize(photo.size)}</span>
+                  </div>
+                  {photoIssues.find((issue) => issue.filename === photo.name) ? (
+                    <p className="mt-2 text-xs font-medium text-red-600">
+                      {photoIssues.find((issue) => issue.filename === photo.name)?.message}
+                    </p>
+                  ) : null}
                 </li>
               ))}
             </ul>
+          ) : null}
+          {photoIssues.some((issue) => !issue.filename) ? (
+            <div className="mt-3 space-y-2 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800" aria-live="polite">
+              {photoIssues
+                .filter((issue) => !issue.filename)
+                .map((issue) => (
+                  <p key={issue.message}>{issue.message}</p>
+                ))}
+            </div>
           ) : null}
         </div>
 

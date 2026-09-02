@@ -27,7 +27,7 @@ export function ServiceCard({ service }: ServiceCardProps) {
               <Image src={service.featuredMedia.src} alt={service.featuredMedia.alt} fill sizes="(max-width: 1024px) 100vw, 25vw" className="object-cover" />
             </div>
           ) : (
-            <video className="aspect-[4/3] w-full bg-black object-cover" controls preload="metadata" playsInline>
+            <video className="aspect-[4/3] w-full bg-black object-cover" controls preload="metadata" playsInline aria-label={service.featuredMedia.alt} title={service.featuredMedia.alt}>
               <source src={service.featuredMedia.src} />
               Your browser does not support the video tag.
             </video>

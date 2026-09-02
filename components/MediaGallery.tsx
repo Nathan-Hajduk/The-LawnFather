@@ -23,7 +23,7 @@ function MediaCard({ item }: { item: MediaItem }) {
             <Image src={item.src} alt={item.title} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
           </div>
         ) : (
-          <video className="aspect-[4/3] w-full bg-black object-contain" controls preload="metadata" playsInline>
+          <video className="aspect-[4/3] w-full bg-black object-contain" controls preload="metadata" playsInline aria-label={item.title} title={item.title}>
             <source src={item.src} />
             Your browser does not support the video tag.
           </video>
