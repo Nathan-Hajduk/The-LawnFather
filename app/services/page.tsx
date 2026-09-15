@@ -13,11 +13,14 @@ export const metadata: Metadata = {
 };
 
 export default function ServicesPage() {
+  const fallServices = SERVICE_OPTIONS.filter((service) => service.group === 'fall');
+  const yearRoundServices = SERVICE_OPTIONS.filter((service) => service.group === 'year-round');
+
   return (
     <div className="px-4 pb-20 sm:px-6 lg:px-8">
       <RevealSection className="mx-auto max-w-7xl space-y-6">
         <p className="section-kicker">Services</p>
-        <h1 className="max-w-3xl text-4xl font-semibold text-slate-900 sm:text-5xl">Service Categories</h1>
+        <h1 className="max-w-3xl text-4xl font-semibold text-slate-900 sm:text-5xl">Fall Services & Year-Round Property Care</h1>
         <p className="max-w-3xl text-base leading-8 text-slate-600">Choose a category, then request a quote. Each service card is clickable and will take you straight to the quote page.</p>
         <div className="flex flex-col gap-3 sm:flex-row">
           <Link href="/quote" className="neon-button">
@@ -30,8 +33,24 @@ export default function ServicesPage() {
       </RevealSection>
 
       <section className="mx-auto mt-14 max-w-7xl">
+        <div className="mb-8">
+          <p className="section-kicker">Fall Services</p>
+          <h2 className="mt-4 text-3xl font-semibold text-slate-900">Seasonal services for Charlotte-area properties.</h2>
+        </div>
+        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+          {fallServices.map((service) => (
+            <ServiceCard key={service.key} service={service} />
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto mt-14 max-w-7xl">
+        <div className="mb-8">
+          <p className="section-kicker">Year-Round Services</p>
+          <h2 className="mt-4 text-3xl font-semibold text-slate-900">Maintaining properties through every season.</h2>
+        </div>
         <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-          {SERVICE_OPTIONS.map((service) => (
+          {yearRoundServices.map((service) => (
             <ServiceCard key={service.key} service={service} />
           ))}
         </div>

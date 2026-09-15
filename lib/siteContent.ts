@@ -1,10 +1,28 @@
+export const BUSINESS_INFO = {
+  name: 'The LawnFather',
+  phone: '980-339-6491',
+  phoneHref: 'tel:9803396491',
+  website: 'https://thelawnfather.org/',
+  facebook: 'https://www.facebook.com/TheLawnFatherNC',
+  googleBusiness: '',
+  // TODO: Add verified public Google Business Profile URL once Google publishes the listing.
+};
+
 export const SERVICE_KEYS = [
+  'aeration-overseeding',
+  'leaf-yard-cleanup',
+  'mulching',
+  'pressure-washing',
+  'junk-debris-removal',
+  'bush-hedge-trimming',
   'mowing',
+  'edging',
   'weedwacking',
   'weeding',
-  'bush-trimming',
-  'mulching',
   'gardening',
+  'planting',
+  'general-landscaping',
+  'bush-trimming',
   'powerwashing',
   'small-handyman-work'
 ] as const;
@@ -13,6 +31,7 @@ export type ServiceKey = (typeof SERVICE_KEYS)[number];
 
 export type ServiceCardContent = {
   key: ServiceKey;
+  group: 'fall' | 'year-round';
   name: string;
   description: string;
   pricingNote: string;
@@ -27,8 +46,87 @@ export type ServiceCardContent = {
 
 export const SERVICE_OPTIONS: ServiceCardContent[] = [
   {
+    key: 'aeration-overseeding',
+    group: 'fall',
+    name: 'Aeration & Overseeding',
+    description: 'Core aeration and overseeding to improve seed-to-soil contact, relieve soil compaction, and help prepare lawns for stronger cool-season growth.',
+    pricingNote: 'Custom Quote',
+    estimateType: 'custom',
+    featuredMedia: {
+      src: '/media/mowing-front-yard-fresh-cut-02.jpeg',
+      kind: 'image',
+      alt: 'Well-maintained LawnFather residential lawn in the Charlotte area'
+    }
+  },
+  {
+    key: 'leaf-yard-cleanup',
+    group: 'fall',
+    name: 'Leaf & Yard Cleanup',
+    description: 'Leaf removal, leaf bagging, branches, landscape-bed cleanup, and seasonal property cleanup.',
+    pricingNote: 'Custom Quote',
+    estimateType: 'custom',
+    featuredMedia: {
+      src: '/media/IMG_8368.JPG',
+      kind: 'image',
+      alt: 'Residential property cleanup and yard trash removal by The LawnFather'
+    }
+  },
+  {
+    key: 'mulching',
+    group: 'fall',
+    name: 'Mulching',
+    description: 'Fresh mulch installation and landscape-bed refreshes for improved curb appeal, moisture retention, and cleaner outdoor spaces.',
+    pricingNote: 'Custom Quote',
+    estimateType: 'custom',
+    featuredMedia: {
+      src: '/media/mulching-front-foundation-bed-01.jpeg',
+      kind: 'image',
+      alt: 'Fresh mulch installed around residential landscape beds in Charlotte'
+    }
+  },
+  {
+    key: 'powerwashing',
+    group: 'fall',
+    name: 'Pressure Washing',
+    description: 'Exterior cleaning for driveways, sidewalks, patios, walkways, siding, and other suitable outdoor surfaces.',
+    pricingNote: 'Custom Quote',
+    estimateType: 'custom',
+    featuredMedia: {
+      src: '/media/powerwashing-curved-walkway-01.jpeg',
+      kind: 'image',
+      alt: 'Cleaned curved walkway after pressure washing'
+    }
+  },
+  {
+    key: 'junk-debris-removal',
+    group: 'fall',
+    name: 'Junk & Debris Removal',
+    description: 'Removal of yard debris, brush, unwanted outdoor items, and general property clutter.',
+    pricingNote: 'Custom Quote',
+    estimateType: 'custom',
+    featuredMedia: {
+      src: '/media/IMG_3093.JPG',
+      kind: 'image',
+      alt: 'Yard cleanup and brush removal at a residential property'
+    }
+  },
+  {
+    key: 'bush-hedge-trimming',
+    group: 'fall',
+    name: 'Bush & Hedge Trimming',
+    description: 'Seasonal trimming and shaping to keep shrubs, hedges, and landscape areas clean and maintained.',
+    pricingNote: 'Custom Quote',
+    estimateType: 'custom',
+    featuredMedia: {
+      src: '/media/trimming-front-landscape-bushes-06.jpeg',
+      kind: 'image',
+      alt: 'Trimmed shrubs and clean landscape edge at LawnFather project'
+    }
+  },
+  {
     key: 'mowing',
-    name: 'Mowing',
+    group: 'year-round',
+    name: 'Lawn Mowing',
     description: 'Consistent, clean cuts that keep your lawn sharp and healthy through the season.',
     pricingNote: 'Custom quote based on property size and job scope.',
     estimateType: 'custom',
@@ -39,7 +137,21 @@ export const SERVICE_OPTIONS: ServiceCardContent[] = [
     }
   },
   {
+    key: 'edging',
+    group: 'year-round',
+    name: 'Edging',
+    description: 'Sharp edges around walkways, driveways, and landscape borders for a cleaner finish.',
+    pricingNote: 'Custom quote based on property size and job scope.',
+    estimateType: 'custom',
+    featuredMedia: {
+      src: '/media/Weedwacking.BushTrimming1.jpeg',
+      kind: 'image',
+      alt: 'Sharp lawn edge and landscape finishing detail'
+    }
+  },
+  {
     key: 'weedwacking',
+    group: 'year-round',
     name: 'Weedwacking',
     description: 'Edge cleanup for fences, beds, walkways, and hard-to-reach areas around your property.',
     pricingNote: 'Custom quote based on property size and job scope.',
@@ -52,6 +164,7 @@ export const SERVICE_OPTIONS: ServiceCardContent[] = [
   },
   {
     key: 'weeding',
+    group: 'year-round',
     name: 'Weeding',
     description: 'Hands-on removal of unwanted growth to keep beds and outdoor spaces tidy.',
     pricingNote: 'Starting at $50/hour.',
@@ -64,31 +177,8 @@ export const SERVICE_OPTIONS: ServiceCardContent[] = [
     }
   },
   {
-    key: 'bush-trimming',
-    name: 'Bush Trimming',
-    description: 'Shape and maintain shrubs so your landscape looks neat and balanced.',
-    pricingNote: 'Custom quote based on property size and job scope.',
-    estimateType: 'custom',
-    featuredMedia: {
-      src: '/media/trimming-front-landscape-bushes-06.jpeg',
-      kind: 'image',
-      alt: 'Front landscape bushes after trimming'
-    }
-  },
-  {
-    key: 'mulching',
-    name: 'Mulching',
-    description: 'Fresh mulch installation to improve curb appeal, moisture retention, and weed control.',
-    pricingNote: 'Custom quote based on property size and job scope.',
-    estimateType: 'custom',
-    featuredMedia: {
-      src: '/media/mulching-front-foundation-bed-01.jpeg',
-      kind: 'image',
-      alt: 'Front foundation bed with fresh mulch'
-    }
-  },
-  {
     key: 'gardening',
+    group: 'year-round',
     name: 'Gardening',
     description: 'Planting, bed cleanup, and garden support for a more polished and welcoming yard.',
     pricingNote: 'Starting at $50/hour.',
@@ -101,19 +191,47 @@ export const SERVICE_OPTIONS: ServiceCardContent[] = [
     }
   },
   {
-    key: 'powerwashing',
-    name: 'Powerwashing',
-    description: 'Exterior cleaning for driveways, patios, siding, and other surfaces that need a refresh.',
+    key: 'planting',
+    group: 'year-round',
+    name: 'Planting',
+    description: 'New plant installation and garden refreshes to improve color, texture, and curb appeal.',
     pricingNote: 'Custom quote based on property size and job scope.',
     estimateType: 'custom',
     featuredMedia: {
-      src: '/media/powerwashing-curved-walkway-01.jpeg',
+      src: '/media/Planting.jpeg',
       kind: 'image',
-      alt: 'Curved walkway after powerwashing'
+      alt: 'Freshly installed planting beds at a residential property'
+    }
+  },
+  {
+    key: 'general-landscaping',
+    group: 'year-round',
+    name: 'General Landscaping',
+    description: 'Seasonal landscape maintenance, beds, cleanup, and property touch-ups that keep outdoor spaces looking cared for.',
+    pricingNote: 'Custom quote based on property size and job scope.',
+    estimateType: 'custom',
+    featuredMedia: {
+      src: '/media/IMG_3090.JPG',
+      kind: 'image',
+      alt: 'Residential landscape and garden work completed by The LawnFather'
+    }
+  },
+  {
+    key: 'bush-trimming',
+    group: 'year-round',
+    name: 'Bush Trimming',
+    description: 'Shape and maintain shrubs so your landscape looks neat and balanced.',
+    pricingNote: 'Custom quote based on property size and job scope.',
+    estimateType: 'custom',
+    featuredMedia: {
+      src: '/media/trimming-front-landscape-bushes-06.jpeg',
+      kind: 'image',
+      alt: 'Front landscape bushes after trimming'
     }
   },
   {
     key: 'small-handyman-work',
+    group: 'year-round',
     name: 'Small Handyman Work',
     description: 'Light property fixes, touch-ups, and help with minor outdoor or home maintenance tasks.',
     pricingNote: 'Starting at $50/hour.',
@@ -166,124 +284,88 @@ export const VALUE_PROPS = [
   'Property-focused quotes'
 ];
 
-export const TESTIMONIALS = [
+export type ReviewItem = {
+  name: string;
+  area: string;
+  postedAt: string;
+  quote: string;
+  source: 'Nextdoor';
+  rating?: number;
+  recommendationLabel: string;
+};
+
+export const TESTIMONIALS: ReviewItem[] = [
+  {
+    name: 'Ann Yountz',
+    area: 'Piper Glen',
+    postedAt: 'August 27, 2026',
+    quote: 'Nathan, owner of “Lawn Father,” is a very respectful, & able body young man! I had 3 small bushes to be planted quickly, esp. with the Very Hot and Dry weather we have had. I wasn’t sure where I was going to plant them, Nathan’s suggestions were well received! He did a great job, and was fairly priced! Call him, you can thank me later! PS; my neighbor drove up and asked Nathan to give her an estimate on work she needed done in her yard! GREAT News travels Fast!',
+    source: 'Nextdoor',
+    recommendationLabel: 'Recommended on Nextdoor'
+  },
+  {
+    name: 'Mark Tayloe',
+    area: 'Providence Arbours',
+    postedAt: 'August 20, 2026',
+    quote: 'Nathan is fantastic. He is professional, personable, and very prompt in his communication. He cut down a couple of large holly trees for us and cleared out some overgrown beds. He did a great job. What a fine young man!',
+    source: 'Nextdoor',
+    recommendationLabel: 'Recommended on Nextdoor'
+  },
+  {
+    name: 'Sheri Stephens-Lewis',
+    area: 'Kilborne Acres',
+    postedAt: 'August 17, 2026',
+    quote: 'If you are looking for someone who does good yard work, Nathan is the one. Nathan did a great job with our yard, mowing, weed eater, and edging and was willing to work us in. Very professional, would definitely recommend and would utilize again.',
+    source: 'Nextdoor',
+    recommendationLabel: 'Recommended on Nextdoor'
+  },
+  {
+    name: 'Abraham Saleem',
+    area: 'McKee Woods',
+    postedAt: 'August 6, 2026',
+    quote: 'Nathan was nothing short of amazing! He did a great job on my retaining wall. In three words to describe the company it would be punctual, easygoing, professional. 10/10 recommend!',
+    source: 'Nextdoor',
+    recommendationLabel: 'Recommended on Nextdoor'
+  },
+  {
+    name: 'Jackie L.',
+    area: 'Orchid Hill',
+    postedAt: 'July 28, 2026',
+    quote: 'Nathan is a great young man who is very responsive and easy to communicate with. Work quality is good and price is reasonable. Highly recommend this contractor.',
+    source: 'Nextdoor',
+    recommendationLabel: 'Recommended on Nextdoor'
+  },
+  {
+    name: 'Laura H.',
+    area: 'Pine Forest, Matthews',
+    postedAt: 'July 9, 2026',
+    quote: 'I needed a quick turnaround, and Nate responded that evening and was able to mow my yard the next day. He took the time to double check what I wanted done and did a wonderful job. He is very friendly, personable, and a hard worker as well as reasonably priced. He spent some extra time and double checked with me when he was done. I was very happy with the results and have asked him to do some additional work for me. I would recommend his services. Check out his photos!',
+    source: 'Nextdoor',
+    recommendationLabel: 'Recommended on Nextdoor'
+  },
+  {
+    name: 'Jimmy Ogburn',
+    area: 'Raeburn',
+    postedAt: 'July 5, 2026',
+    quote: 'We were totally pleased with Nate’s most professional and great work. If you need lawn work done, he will not disappoint you with his excellent care. He is the best. Jimmy and Trish Ogburn.',
+    source: 'Nextdoor',
+    recommendationLabel: 'Recommended on Nextdoor'
+  },
+  {
+    name: 'Lynne B.',
+    area: 'Fort Mill, SC',
+    postedAt: 'July 5, 2026',
+    quote: 'Nate did a super job of trimming my hedges, trees, and bushes at a reasonable price. What a punctual, polite, efficient professional. I will be hiring him again. I think the pictures speak for themselves.',
+    source: 'Nextdoor',
+    recommendationLabel: 'Recommended on Nextdoor'
+  },
   {
     name: 'Katherine Grier',
     area: "Settler's Landing",
-    postedAt: '3 days ago',
-    stars: 5,
-    quote: "Highly recommend! He was extremely prompt, very polite, and did a thorough job from start to finish. It's refreshing to work with someone who communicates well, shows up when they say they will, and takes pride in their work. He paid attention to the details and left everything looking great. If you're looking for a reliable landscaper, I would definitely recommend him!"
-  },
-  {
-    name: 'Mary H.',
-    area: 'Fort Mill, SC',
-    postedAt: '5 days ago',
-    stars: 5,
-    quote: "We had an out-of-control garden that Nate handled professionally and with a fantastic attitude. I had a few additional requests and he responded with, 'I won't leave until you're 100% satisfied.' He's the best. I'm asking him to do some additional work for us. We were so pleased."
-  },
-  {
-    name: 'Gordon S.',
-    area: 'White Oak',
-    postedAt: '5 days ago',
-    stars: 5,
-    quote: 'Nate is great! Pun intended. He is a sterling young man, prompt, keeps you updated, works hard, communicates, suggests and gets the job done. Easy going and all-round nice guy. His pricing is reasonable too. Highly recommend his services for your yard work. Work with him for a great experience.'
-  },
-  {
-    name: 'Antonio Garrison',
-    area: 'Southampton',
-    postedAt: '18 Jun',
-    stars: 5,
-    quote: "Working with Nathan has really been a highlight. He's prompt, professional, keeps you updated, followed instructions on the scope/project, great work, and overall was great to work with. I have used his services quite a few times and plan to continue to do so. Thank you for all the work you've done for me thus far!"
-  },
-  {
-    name: 'Anjana Bhawnani',
-    area: 'Heritage-Machado',
-    postedAt: '17 Jun',
-    stars: 5,
-    quote: 'Nathan was outstanding. My regular lawn service had not been out for quite some time, so the grass had become very overgrown. Despite the challenging condition of the yard, Nathan did an excellent job. He was punctual, his communication was prompt and professional, and his pricing was very fair considering the amount of work involved. He was courteous, reliable, and responsible throughout the entire process. Most importantly, the yard looks fantastic now. I highly recommend Nathan and would not hesitate to hire him again.'
-  },
-  {
-    name: 'Gina D.',
-    area: 'Ashton Grove',
-    postedAt: '12 Jun',
-    stars: 5,
-    quote: "Nate worked hard today to remove all weeds in my front and back gardens. It's 97 outside and he didn't stop once. I'm grateful for Nate's help and will definitely call him again. Thanks, Nate!"
-  },
-  {
-    name: 'Robin Lassiter',
-    area: 'Sardis Forest',
-    postedAt: '11 Jun',
-    stars: 5,
-    quote: 'Nathan was super! I have overgrown hedges and he was more than willing to tackle the job. Such a respectful and pleasant young man and VERY hard working. Highly recommended. Thank you, Nathan.'
-  },
-  {
-    name: 'Denise Arceneaux',
-    area: 'Idol Rock',
-    postedAt: '9 Jun',
-    stars: 5,
-    quote: "I highly recommend Nate for anyone looking for quality lawn care services. He did an exceptional job mowing and edging my yard today, and the results exceeded my expectations. His attention to detail, professionalism, and pride in his work were evident from start to finish. My lawn looks neat, clean, and beautifully maintained. The edging was crisp and precise, giving the entire yard a polished appearance. Nate was reliable, efficient, and left everything looking fantastic. I couldn't be happier with the outcome and will definitely be using his services again. If you're looking for someone who truly cares about the quality of their work, Nate is the person to call! Thank you, Nate, for a job well done!"
-  },
-  {
-    name: 'Richard Crenshaw',
-    area: 'Montibello',
-    postedAt: '2w',
-    stars: 5,
-    quote: 'I used Nate "The LawnFather" for the 3rd time today and he was excellent as usual. He trimmed shrubs, trees, worked on my bed edging and put out mulch. He is worth more than he charges.'
-  },
-  {
-    name: 'Rick Garrett',
-    area: 'Old Salem/Meredith',
-    postedAt: '8 Jun',
-    stars: 5,
-    quote: "I couldn't recommend Nathan more for your yard work needs. After contacting him, he showed up within 24 hours and did a super amazing job tackling an overgrown, large and hilly yard in extreme heat. He is professional, kind and an overall pleasure to work with."
-  },
-  {
-    name: 'Heather McClure',
-    area: 'Providence Forest',
-    postedAt: '3 Jun',
-    stars: 5,
-    quote: 'Nathan is very thorough, hardworking, and a good communicator. He was a big help cleaning out some backyard overgrowth for us, glad to have found him.'
-  },
-  {
-    name: 'Richard Crenshaw',
-    area: 'Montibello',
-    postedAt: '2 Jun',
-    stars: 5,
-    quote: 'Nathan does excellent work, I have used his services twice and plan another job for him next week.'
-  },
-  {
-    name: 'Kim Powell',
-    area: 'Sharon Woods',
-    postedAt: '2 Jun',
-    stars: 5,
-    quote: 'Nathan was amazing! Very communicative, incredibly polite and hard working. He mowed, edged, trimmed bushes and blew off our yard and patio, all of which had been neglected for a month by our previous lawn guys. He worked in the unexpected rain, did more than I had asked for or expected and cleaned up after himself. All for a very reasonable price. So happy to support this young man and his small business. Will definitely use him again and recommend The LawnFather to neighbors and friends. Thank you Nathan!'
-  },
-  {
-    name: 'Kurt Jacobs',
-    area: 'Providence Plantation',
-    postedAt: '1 Jun',
-    stars: 5,
-    quote: 'I would definitely hire Nathan again. He initially helped me clean the pool, trim hedges, clean up the yard. He is hardworking, dependable, respectful and communicates very well.'
-  },
-  {
-    name: 'David Conner',
-    area: 'Stonecreek Ranch',
-    postedAt: '31 May',
-    stars: 5,
-    quote: 'Nathan did a fantastic job on our lawn. We reached out to him kind of last minute and he was very communicative and did exactly what he said! Great service and awesome performance!'
-  },
-  {
-    name: 'Kay L.',
-    area: 'International Dr',
-    postedAt: '30 May',
-    stars: 5,
-    quote: 'I found Nate last minute on the Nextdoor app when another helper canceled on me. He was punctual, professional, and very friendly. He handled moving everything with ease and made the process much less stressful. I really appreciated his reliability and positive attitude. I would definitely recommend Nate to anyone needing help with a move and would hire him again in the future!'
-  },
-  {
-    name: 'Richard Crenshaw',
-    area: 'Montibello',
-    postedAt: '30 May',
-    stars: 5,
-    quote: 'I have used Nate twice and he is great.'
+    postedAt: 'June 25, 2026',
+    quote: 'Highly recommend! He was extremely prompt, very polite, and did a thorough job from start to finish. It’s refreshing to work with someone who communicates well, shows up when they say they will, and takes pride in their work. He paid attention to the details and left everything looking great. If you’re looking for a reliable landscaper, I would definitely recommend him!',
+    source: 'Nextdoor',
+    rating: 5,
+    recommendationLabel: '★★★★★\n5 Stars'
   }
 ];
