@@ -61,10 +61,10 @@ export function Navbar() {
             );
           })}
 
-          <Link href="/quote" className="neon-button ml-2">
+          <a href="/quote" className="neon-button ml-2">
             Get a Quote
             <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
-          </Link>
+          </a>
         </nav>
 
         <button
@@ -90,10 +90,10 @@ export function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <Link href="/quote" className="neon-button mt-1 w-full">
+            <a href="/quote" className="neon-button mt-1 w-full">
               Get a Quote
               <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
-            </Link>
+            </a>
           </div>
         </div>
       ) : null}
