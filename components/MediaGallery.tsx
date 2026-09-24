@@ -14,13 +14,20 @@ type MediaPair = {
   later?: MediaItem;
 };
 
-function MediaCard({ item }: { item: MediaItem }) {
+function MediaCard({ item, eager }: { item: MediaItem; eager: boolean }) {
   return (
     <article className="glass-panel overflow-hidden p-2">
       <div className="overflow-hidden rounded-3xl border border-white/10 bg-slate-950 shadow-lg">
         {item.kind === 'image' ? (
           <div className="relative aspect-[4/3] w-full">
-            <Image src={item.src} alt={item.title} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
+            <Image
+              src={item.src}
+              alt={item.title}
+              fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              loading={eager ? 'eager' : 'lazy'}
+              className="object-cover"
+            />
           </div>
         ) : (
           <video className="aspect-[4/3] w-full bg-black object-contain" controls preload="metadata" playsInline aria-label={item.title} title={item.title}>
@@ -57,14 +64,14 @@ export function MediaGallery({ title, items, className = '' }: MediaGalleryProps
       </div>
 
       <div className="space-y-3">
-        {pairedItems.map((pair) => (
+        {pairedItems.map((pair, index) => (
           <div key={pair.earlier.id} className="grid gap-3 md:grid-cols-2">
-            <div className="glass-panel overflow-hidden p-2">
-              <MediaCard item={pair.earlier} />
+              <div className="glass-panel overflow-hidden p-2">
+                <MediaCard item={pair.earlier} eager={index < 2} />
             </div>
             {pair.later ? (
               <div className="glass-panel overflow-hidden p-2">
-                <MediaCard item={pair.later} />
+                <MediaCard item={pair.later} eager={index < 2} />
               </div>
             ) : (
               <div className="hidden md:block" />
