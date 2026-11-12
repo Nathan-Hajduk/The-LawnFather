@@ -30,7 +30,7 @@ function MediaCard({ item, eager }: { item: MediaItem; eager: boolean }) {
             />
           </div>
         ) : (
-          <video className="aspect-[4/3] w-full bg-black object-contain" controls preload="metadata" playsInline aria-label={item.title} title={item.title}>
+          <video className="aspect-[4/3] w-full bg-black object-contain" controls preload="none" playsInline aria-label={item.title} title={item.title}>
             <source src={item.src} />
             Your browser does not support the video tag.
           </video>
